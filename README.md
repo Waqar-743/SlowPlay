@@ -1,88 +1,78 @@
-# Rock Scissor Paper Game
+# Slowplay arcade
 
-A simple and interactive **Rock–Scissor–Paper** game built with **React** and **Vite**. This project uses Vite for fast development and bundling, along with ESLint rules to maintain clean and consistent code.
+A responsive React + Vite browser arcade. **Island Drift is the first playable release.** The catalogue includes the complete six-game roadmap; the other five games are deliberately marked as future releases. The original Rock Paper Scissors source is preserved verbatim in `src/games/rock-paper-scissors/` for its separately approved upgrade.
 
-## 🚀 Features
+## Run locally
 
-* Classic Rock–Scissor–Paper gameplay
-* Instant results with simple UI
-* Built using **React + Vite** for fast refresh and smooth development
-* ESLint configuration included for code quality
+Use Node 22.12 or later (or Node 20.19+).
 
-## 🛠️ Tech Stack
-
-* **React**
-* **Vite**
-* **JavaScript (ES6+)**
-* **ESLint**
-
-## 📦 Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone <your-repo-url>
-   ```
-2. Navigate to the project folder:
-
-   ```bash
-   cd rock-scissor-paper
-   ```
-3. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-## ▶️ Running the Project
-
-Start the development server:
-
-```bash
+```sh
+npm ci
 npm run dev
 ```
 
-The app will run at the URL provided in your terminal (typically `http://localhost:5173`).
+Open the address printed by Vite, including `/rock-paper-scissors-game/`. Open `#/island-drift` to go directly to Island Drift. Hash navigation works on static GitHub Pages and survives refreshing a game URL.
 
-## 🧱 Build for Production
+## Island Drift
 
-To create a production build:
+Free exploration around a complete hand-painted island. There is no timer or loss condition. Sail near all 16 coastline sectors to discover the whole coast, or simply wander. The wooden boat includes a seated helmsman, a lantern and a fading wake. Painted material maps are applied to the real 3D environment.
 
-```bash
+- **W / up arrow:** accelerate.
+- **A / left arrow and D / right arrow:** steer.
+- **S / down arrow:** brake, then hold to reverse.
+- **P / Escape:** pause or resume.
+- Touch controls support simultaneous steering and throttle/braking.
+- Pause, help, restart, reset boat, day/night and sound controls are available in the game. Decorative motion follows the device reduced-motion preference.
+- The game pauses and clears held inputs when the page loses focus or is hidden.
+- The world boundary gently turns the boat back toward the island. Reset boat returns to safe water. Restart begins a fresh voyage.
+
+Day/night changes the sky, clouds, stars, moon, water, terrain lighting, boat lantern and lighthouse together. Preferences and sailing personal bests are stored locally, with a safe fallback if storage is unavailable. There are no accounts or server-side saves. Clearing browser data removes local preferences and bests.
+
+The game requires WebGL. An inline recovery message appears when the renderer cannot start. Sound uses browser-generated ambient audio and starts only following player interaction.
+
+## Checks
+
+```sh
+npm run lint
+npm run test:physics
 npm run build
+npx playwright install chromium
+npm run test:e2e
 ```
 
-To preview the build:
+The physics suite checks acceleration, coasting, braking, reverse, steering, shoreline and rock recovery, a continuous full coastline lap, world-boundary recovery and frame-spike handling. Browser tests run against the **production build** with the GitHub Pages base path. They cover session flow, keyboard/touch controls, focus, filters, asset requests, modes, persistence, cleanup, and representative desktop/tablet/phone viewports. These are simulated mobile checks; they do not certify performance or behavior on physical phones.
 
-```bash
-npm run preview
-```
+The legacy Rock Paper Scissors directory is excluded from current lint because it is preserved source, outside this stage's authorized implementation. All active application, game, and QA code remains checked.
 
-## 🧩 Plugins Used
+## Project structure
 
-This project uses the official Vite React plugins:
+| Path | Purpose |
+| --- | --- |
+| `src/data/games.js` | Catalogue, descriptions, categories and release status |
+| `src/App.jsx` | Library, hash navigation, lazy loading, error boundary and About dialog |
+| `src/components/` | Shared custom SVG symbols and future-game illustrations |
+| `src/games/island-drift/` | Isolated game UI, Three.js scene, physics and game styles |
+| `src/games/rock-paper-scissors/` | Preserved original source; not loaded by the arcade |
+| `public/art/` | Optimized original paintings, materials and art provenance |
+| `tests/` | Independent physics and production browser checks |
 
-* `@vitejs/plugin-react` – Uses **Babel** (or **oxc** with rolldown-vite) for Fast Refresh
-* `@vitejs/plugin-react-swc` – Uses **SWC** for Fast Refresh
+Three.js is loaded only when Island Drift opens. Scene destruction cancels animation, detaches observers and listeners, stops audio, clears input, removes the canvas, and disposes GPU resources. Rendering limits pixel density to keep the scene lightweight.
 
-## ⚠️ React Compiler
+## Artwork
 
-The React Compiler is **not enabled** by default due to its impact on development and build performance. If you wish to enable it, refer to the official documentation:
-[https://react.dev/learn/react-compiler/installation](https://react.dev/learn/react-compiler/installation)
+All nine raster assets were generated with the built-in image tool in a consistent watercolor/gouache style and optimized to WebP. Day and night share the same composition. The instruction map follows the actual island's horizontal layout, southern cove, northeast lighthouse and central/western palms. Prompts and the asset manifest are in `public/art/ART-DIRECTION.md`. Interface icons use a consistent custom SVG stroke style.
 
-## 📚 ESLint Configuration
+## GitHub Pages
 
-If you plan to expand this project into a production-ready application, consider using **TypeScript** with type-aware linting. You can explore the official TS template:
-[https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts)
+`vite.config.js` sets `base: '/rock-paper-scissors-game/'`. Every public game asset resolves through `import.meta.env.BASE_URL`; bundled module paths are handled by Vite. The existing Pages workflow builds `dist` and publishes it. The production environment currently permits the `main` branch only. A feature branch can be reviewed and run locally; live production publication requires merging the finished change to `main`.
 
-## 🤝 Contributing
+## Roadmap and approval boundary
 
-Contributions are welcome! Feel free to fork the repo and submit a pull request.
+1. **Island Drift:** this release.
+2. **Rock Paper Scissors:** best-of-five, streaks, optional names and accessible controls.
+3. **Tic-Tac-Toe:** computer opponent, local two-player, turn indicators and restart.
+4. **Memory Match:** difficulties, move counter, timer and personal bests.
+5. **Snake:** speeds, scoring, pause, keyboard and mobile controls.
+6. **2048:** keyboard, swipe, visible directional controls, score, saved progress and restart.
 
-## 📄 License
-
-This project is open-source and available under the MIT License.
-
----
-
-Enjoy playing Rock–Scissor–Paper! ✋✌️🪨
+Present and review each completed game, then obtain the owner's explicit approval before implementing the next. Future catalogue illustrations do not enable or implement those games.
