@@ -857,9 +857,14 @@ export function createIslandScene(container, { input, onSnapshot, onNotice, redu
       }
     },
     dispose() {
+      if (destroyed) return
       destroyed = true
       cancelAnimationFrame(frame)
       resizeObserver.disconnect()
+      renderer.domElement.remove()
+      // Release the whole context before per-object deletion so a busy driver
+      // does not drain hundreds of queued GPU deletions during navigation.
+      renderer.forceContextLoss()
       const disposed = new Set()
       scene.traverse((object) => {
         if (object.geometry && !disposed.has(object.geometry)) { object.geometry.dispose(); disposed.add(object.geometry) }
@@ -868,8 +873,6 @@ export function createIslandScene(container, { input, onSnapshot, onNotice, redu
       })
       resources.forEach((resource) => resource.dispose())
       renderer.dispose()
-      renderer.forceContextLoss()
-      renderer.domElement.remove()
     },
   }
 }
