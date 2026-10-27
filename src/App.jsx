@@ -31,6 +31,7 @@ export default function App() {
   const [category, setCategory] = useState('All games')
   const dialogRef = useRef(null)
   const headingRef = useRef(null)
+  const restoreLibraryFocus = useRef(false)
   useEffect(() => {
     const onHash = () => {
       setRoute(window.location.hash === '#/island-drift' ? 'island-drift' : 'library')
@@ -40,9 +41,15 @@ export default function App() {
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
+  useEffect(() => {
+    if (route === 'library' && restoreLibraryFocus.current) {
+      restoreLibraryFocus.current = false
+      headingRef.current?.focus()
+    }
+  }, [route])
   useEffect(() => { document.title = route === 'library' ? 'Slowplay — A little play. A little escape.' : 'Island Drift — Slowplay' }, [route])
   const openGame = () => { window.location.hash = '/island-drift' }
-  const back = () => { window.location.hash = '/'; requestAnimationFrame(() => headingRef.current?.focus()) }
+  const back = () => { restoreLibraryFocus.current = true; window.location.hash = '/' }
   if (route === 'island-drift') return <GameBoundary onBack={back}><Suspense fallback={<main className="load-screen" aria-busy="true"><Icon name="compass" size={42}/><h1>Finding your island…</h1><p>Gathering the boat, the sea, and a little sunshine.</p><div className="loading-paint"/></main>}><IslandDrift onBack={back}/></Suspense></GameBoundary>
   const visibleGames = games.filter(game => category === 'All games' || game.categories.includes(category))
   return <>
