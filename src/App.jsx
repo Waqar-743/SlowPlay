@@ -48,8 +48,10 @@ export default function App() {
     }
   }, [route])
   useEffect(() => { document.title = route === 'library' ? 'Slowplay — A little play. A little escape.' : 'Island Drift — Slowplay' }, [route])
-  const openGame = () => { window.location.hash = '/island-drift' }
-  const back = () => { restoreLibraryFocus.current = true; window.location.hash = '/' }
+  // Menu actions commit their screen during the click, without waiting behind
+  // a rendered frame for the browser's later hashchange notification.
+  const openGame = () => { setRoute('island-drift'); window.location.hash = '/island-drift' }
+  const back = () => { restoreLibraryFocus.current = true; setRoute('library'); window.location.hash = '/' }
   if (route === 'island-drift') return <GameBoundary onBack={back}><Suspense fallback={<main className="load-screen" aria-busy="true"><Icon name="compass" size={42}/><h1>Finding your island…</h1><p>Gathering the boat, the sea, and a little sunshine.</p><div className="loading-paint"/></main>}><IslandDrift onBack={back}/></Suspense></GameBoundary>
   const visibleGames = games.filter(game => category === 'All games' || game.categories.includes(category))
   return <>
