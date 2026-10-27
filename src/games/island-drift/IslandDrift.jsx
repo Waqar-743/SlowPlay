@@ -244,7 +244,7 @@ export default function IslandDrift({ onBack }) {
   }
 
   return (
-    <section className={`id-game id-${mode}`} aria-label="Island Drift">
+    <section className={`id-game id-${mode}${launched ? ' id-launched' : ''}`} aria-label="Island Drift">
       <div className="id-topline">
         <button className="id-back" onClick={returnToLibrary}><Icon name="arrow-left" size={17} /> Back to games</button>
         <span className="id-edition">A LITTLE ESCAPE / NO. 01</span>

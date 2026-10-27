@@ -17,6 +17,8 @@ Open the address printed by Vite, including `/rock-paper-scissors-game/`. Open `
 
 Free exploration around a complete hand-painted island. There is no timer or loss condition. Sail near all 16 coastline sectors to discover the whole coast, or simply wander. The wooden boat includes a seated helmsman, a lantern and a fading wake. Painted material maps are applied to the real 3D environment.
 
+Gameplay opens in a close third-person view, with the boat and helmsman prominent in the foreground. The camera follows turns smoothly. Rich turquoise shallows, deeper blue water, warm timber, layered island greenery, and gentle boat and wake motion give the sailing scene more colour and depth. Reduced-motion settings remove decorative bobbing while preserving navigation.
+
 - **W / up arrow:** accelerate.
 - **A / left arrow and D / right arrow:** steer.
 - **S / down arrow:** brake, then hold to reverse.

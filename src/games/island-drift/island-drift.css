@@ -92,3 +92,149 @@
 @media(max-width:590px) and (max-height:600px) and (orientation:landscape){
   .id-notice{top:10px;bottom:auto;left:198px;transform:none;max-width:calc(100% - 354px);font-size:10px;padding:8px}
 }
+
+/* Let the sea take the screen once a voyage starts. */
+.id-launched{
+  --id-teal:#176b60;
+  max-width:1760px;
+  min-height:100dvh;
+  padding:0 clamp(12px,2.2vw,36px) 8px;
+}
+.id-launched .id-topline{padding:4px 0;height:52px}
+.id-launched .id-game-heading{margin:0 0 10px;min-height:36px}
+.id-launched .id-game-heading .eyebrow{display:none}
+.id-launched .id-game-heading h1{font-size:27px;margin:0}
+.id-launched .id-voyage-label>span{font-size:9px;letter-spacing:.08em}
+.id-launched .id-voyage-label small{font-size:11px}
+.id-launched .id-stage{
+  height:calc(100dvh - 246px);
+  min-height:360px;
+  max-height:1000px;
+  border-color:#8fbcb4;
+  border-radius:9px 9px 0 0;
+  background:#1c8596;
+}
+.id-launched .id-scene-grain{opacity:.055}
+.id-launched .id-hud{
+  top:16px;
+  left:16px;
+  bottom:auto;
+  width:238px;
+  padding:12px 14px;
+  border-color:#f4fff2b3;
+  background:#f4f9ede8;
+  box-shadow:0 4px 22px #134d5420;
+}
+.id-launched .id-hud-label{font-size:10px;letter-spacing:.045em}
+.id-launched .id-progress-row{margin-top:8px}
+.id-launched .id-progress-track{height:4px;background:#c5dccc;border-radius:2px}
+.id-launched .id-progress-track>span{background:#238977}
+.id-launched .id-lap-note{font-size:10px;line-height:1.4;color:#52776a}
+.id-launched .id-hud-actions{right:16px;top:16px;gap:7px}
+.id-launched .id-tool{background:#f4f9edf0;border-color:#f4fff2b3;color:#225e54;border-radius:6px}
+.id-launched .id-tool:hover{background:#ffffff}
+.id-launched .id-mode-tool{padding:0 13px}
+.id-launched .id-control-deck{
+  padding:11px 20px 12px;
+  margin-top:0;
+  border-color:#c2d6c8;
+  background:#e7efe2;
+  border-radius:0 0 9px 9px;
+}
+.id-launched .id-control-label{font-size:9px;margin-bottom:6px;color:#587a65}
+.id-launched .id-control{min-height:52px;min-width:64px;border-color:#b5cdbb;background:#f6f9ed;border-radius:6px}
+.id-launched .id-control.is-held{background:#c5e2cb;box-shadow:inset 0 2px 4px #34564622}
+.id-launched .id-brake,.id-launched .id-throttle{min-width:91px}
+.id-launched .id-throttle{background:#176b60;border-color:#176b60;color:#fff9df}
+.id-launched .id-throttle.is-held{background:#0d514a;color:#fff9df}
+.id-launched .id-control>span{font-size:12px}
+.id-launched .id-deck-message{margin-top:4px}
+.id-launched .id-deck-message p{color:#4f7665;font-size:16px}
+.id-launched .id-deck-message p>span{font-size:10px;color:#6e8875}
+.id-launched .id-voyage-footer{padding:5px 2px 0;min-height:45px;font-size:10px}
+.id-launched .id-bottom-note{display:none}
+.id-launched .id-compass{display:none}
+.id-launched .id-speed{right:20px;bottom:18px;text-shadow:0 2px 9px #123e4d}
+.id-launched .id-speed>strong{font-size:35px}
+.id-launched .id-notice{bottom:23px}
+.id-launched.id-night .id-stage{border-color:#345e72}
+.id-launched.id-night .id-hud,.id-launched.id-night .id-hud-actions .id-tool{
+  color:#e7f6df;
+  background:#163d50eb;
+  border-color:#93c1c56b;
+}
+.id-launched.id-night .id-hud-actions .id-tool:hover{background:#285668}
+.id-launched.id-night .id-lap-note{color:#c0d8cb}
+.id-launched.id-night .id-progress-track{background:#426c75}
+.id-launched.id-night .id-progress-track>span{background:#98dfcd}
+
+@media(max-width:800px){
+  .id-launched .id-stage{height:calc(100dvh - 252px);min-height:350px}
+  .id-launched .id-hud{width:222px}
+  .id-launched .id-control-deck{padding:11px 16px 12px}
+  .id-launched .id-deck-message{display:none}
+}
+@media(max-width:590px){
+  .id-launched{padding:0 10px 6px}
+  .id-launched .id-topline{height:49px;padding:2px 2px}
+  .id-launched .id-game-heading{margin-bottom:8px;min-height:31px;padding-inline:2px}
+  .id-launched .id-game-heading h1{font-size:24px}
+  .id-launched .id-voyage-label{gap:6px}
+  .id-launched .id-voyage-label>span{font-size:8px}
+  .id-launched .id-voyage-label small{font-size:10px}
+  .id-launched .id-stage{height:calc(100dvh - 230px);min-height:240px;max-height:none;border-radius:7px 7px 0 0}
+  .id-launched .id-hud{top:12px;left:12px;width:164px;padding:10px}
+  .id-launched .id-hud-label{font-size:9px;gap:5px;letter-spacing:0}
+  .id-launched .id-progress-row{margin-top:7px}
+  .id-launched .id-lap-note{display:none}
+  .id-launched .id-hud-actions{right:12px;top:12px;max-width:142px;gap:5px}
+  .id-launched .id-mode-tool{padding:0}
+  .id-launched .id-speed{right:16px;bottom:17px}
+  .id-launched .id-speed>strong{font-size:31px}
+  .id-launched .id-control-deck{padding:9px 11px 10px;gap:10px}
+  .id-launched .id-control-label{font-size:9px;margin-bottom:5px;letter-spacing:.035em}
+  .id-launched .id-control-pair{gap:7px}
+  .id-launched .id-control{min-width:53px;min-height:54px;padding:8px 10px}
+  .id-launched .id-steer-group .id-control{padding:6px 12px}
+  .id-launched .id-brake,.id-launched .id-throttle{min-width:68px}
+  .id-launched .id-control>span{font-size:11px}
+  .id-launched .id-voyage-footer{font-size:9px;padding:3px 2px 0;min-height:45px}
+  .id-launched .id-voyage-footer strong{display:inline;margin-left:5px;font-size:10px}
+  .id-launched .id-voyage-footer>div{gap:11px}
+  .id-launched .id-voyage-footer button{font-size:10px!important}
+  .id-launched .id-notice{top:86px;bottom:auto;max-width:calc(100% - 24px);font-size:11px}
+}
+@media(max-width:374px){
+  .id-launched .id-hud{width:144px}
+  .id-launched .id-hud-actions{max-width:94px}
+  .id-launched .id-control-deck{padding-inline:8px;gap:8px}
+  .id-launched .id-control{min-width:48px}
+  .id-launched .id-brake,.id-launched .id-throttle{min-width:62px}
+  .id-launched .id-voyage-footer{font-size:8px}
+  .id-launched .id-voyage-footer>div{gap:8px}
+  .id-launched .id-voyage-footer strong{margin-left:3px}
+}
+@media(max-height:600px) and (orientation:landscape){
+  .id-launched{padding:0 12px 3px}
+  .id-launched .id-topline{height:44px;padding:0}
+  .id-launched .id-game-heading{display:none}
+  .id-launched .id-edition{font-size:8px}
+  .id-launched .id-stage{height:calc(100dvh - 157px);min-height:145px;max-height:none}
+  .id-launched .id-hud{left:12px;top:10px;width:202px;padding:9px 11px}
+  .id-launched .id-hud-label{font-size:9px}
+  .id-launched .id-progress-row{margin-top:6px}
+  .id-launched .id-lap-note{display:none}
+  .id-launched .id-hud-actions{right:12px;top:10px}
+  .id-launched .id-control-deck{padding:7px 12px;gap:12px}
+  .id-launched .id-control-label{display:none}
+  .id-launched .id-control{min-height:44px;min-width:64px;padding:5px 12px}
+  .id-launched .id-steer-group .id-control{flex-direction:row;gap:8px;padding:5px 12px}
+  .id-launched .id-control kbd{margin-top:0}
+  .id-launched .id-brake,.id-launched .id-throttle{min-width:88px}
+  .id-launched .id-voyage-footer{min-height:45px;padding-top:0}
+  .id-launched .id-compass{bottom:12px}
+  .id-launched .id-compass>svg{width:30px;height:30px}
+  .id-launched .id-speed{right:16px;bottom:12px}
+  .id-launched .id-speed>strong{font-size:27px}
+  .id-launched .id-notice{top:auto;left:50%;bottom:12px;transform:translateX(-50%);max-width:calc(100% - 160px);padding:8px 10px;font-size:10px}
+}
