@@ -95,8 +95,11 @@ test('the close camera starts near the boat and stays readable in both modes at 
     await page.screenshot({ path: path.join(outputDirectory, `island-drift-close-day-${view.name}.png`), fullPage: true })
     await page.getByRole('button', { name: 'Switch to night mode', exact: true }).click()
     await expect.poll(async () => (await state(page)).mode).toBe('night')
-    await page.waitForTimeout(1700)
+    // Wait for the actual lighting transition, including under software WebGL.
+    await expect.poll(async () => (await state(page)).lighting.nightBlend).toBeGreaterThan(0.99)
     const night = await state(page)
+    expect(night.lighting.lantern).toBeGreaterThan(10)
+    expect(night.lighting.lighthouse).toBeGreaterThan(33)
     expectCloseFraming(night, `${view.name} night`)
     await expectBoatNotCoveredByHud(page, night)
     await expectControlsFit(page)

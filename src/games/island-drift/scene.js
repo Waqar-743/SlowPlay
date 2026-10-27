@@ -809,17 +809,19 @@ export function createIslandScene(container, { input, onSnapshot, onNotice, redu
     water.material.uniforms.lightDirection.value.set(cameraForward.x * 0.94 - Math.cos(cameraHeading) * 0.23, 0.22, cameraForward.z * 0.94 - Math.sin(cameraHeading) * 0.23).normalize()
     // Celestial bodies sit at optical infinity so they remain visible on a
     // narrow phone view while the camera travels around the coast.
-    const portraitSky = camera.aspect < 0.8
-    const moonLateral = portraitSky ? 26 : -40
-    const sunLateral = portraitSky ? 30 : -60
+    // Tablets also need the clear space to the right of the progress panel.
+    const narrowSky = camera.aspect < 1.3
+    const tallSky = camera.aspect < 0.8
+    const moonLateral = narrowSky ? 26 : -40
+    const sunLateral = narrowSky ? 30 : -60
     moon.position.copy(camera.position).addScaledVector(cameraForward, 210)
     moon.position.x += Math.cos(cameraHeading) * moonLateral
     moon.position.z += Math.sin(cameraHeading) * moonLateral
-    moon.position.y += portraitSky ? 17 : 24
+    moon.position.y += tallSky ? 17 : 24
     sun.position.copy(camera.position).addScaledVector(cameraForward, 250)
     sun.position.x += Math.cos(cameraHeading) * sunLateral
     sun.position.z += Math.sin(cameraHeading) * sunLateral
-    sun.position.y += portraitSky ? 20 : 28
+    sun.position.y += tallSky ? 20 : 28
     if (now - snapshotAt > 350) {
       onSnapshot({ ...state, sectors: [...state.sectors], elapsed, running: active, mode: targetNight > 0.5 ? 'night' : 'day' })
       snapshotAt = now
@@ -832,7 +834,16 @@ export function createIslandScene(container, { input, onSnapshot, onNotice, redu
     setMode(value) { targetNight = value === 'night' ? 1 : 0 },
     setReducedMotion(value) { reducedMotion = value },
     reset({ preserveVoyage = false } = {}) { const previousState = state; state = createBoatState(); if (preserveVoyage) { state.distance = previousState.distance; state.sectors = previousState.sectors } else elapsed = 0; noticeAt = -8; steeringPose = 0; cameraCheckTime = -1; cameraLift = 0; boat.position.set(state.x, 0.27, state.z); boat.rotation.set(0, -state.heading, 0); updateSailor(); snapCamera(); wake.forEach((p) => { p.userData.age = 100; p.visible = false }); spray.forEach((p) => { p.userData.age = 100; p.visible = false }); onSnapshot({ ...state, elapsed, running: active, mode: targetNight > 0.5 ? 'night' : 'day' }) },
-    getState() { return { ...state, sectors: [...state.sectors], elapsed, running: active, mode: targetNight > 0.5 ? 'night' : 'day', boundary: WORLD_RADIUS, rocks: collisionRocks.map((r) => ({ ...r })), camera: { heading: cameraHeading, position: { x: camera.position.x, y: camera.position.y, z: camera.position.z }, distance: camera.position.distanceTo(boat.position), fov: camera.fov, headingLag: Math.atan2(Math.sin(state.heading - cameraHeading), Math.cos(state.heading - cameraHeading)) }, framing: framing() } },
+    getState() {
+      return {
+        ...state, sectors: [...state.sectors], elapsed, running: active,
+        mode: targetNight > 0.5 ? 'night' : 'day',
+        lighting: { nightBlend: night, lantern: boatLight.intensity, lighthouse: lighthouseLight.intensity },
+        boundary: WORLD_RADIUS, rocks: collisionRocks.map((r) => ({ ...r })),
+        camera: { heading: cameraHeading, position: { x: camera.position.x, y: camera.position.y, z: camera.position.z }, distance: camera.position.distanceTo(boat.position), fov: camera.fov, headingLag: Math.atan2(Math.sin(state.heading - cameraHeading), Math.cos(state.heading - cameraHeading)) },
+        framing: framing(),
+      }
+    },
     dispose() {
       destroyed = true
       cancelAnimationFrame(frame)
