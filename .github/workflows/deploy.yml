@@ -43,7 +43,15 @@ jobs:
           npm run test:physics
 
       - name: Install browser for production checks
-        run: npx playwright install --with-deps chromium
+        timeout-minutes: 5
+        run: |
+          # The Azure package mirror stalled during repeated browser setup runs.
+          # Keep Ubuntu's signed packages, using its standard HTTPS archive.
+          if [ -f /etc/apt/apt-mirrors.txt ]; then
+            sudo sed -i 's|http://azure\.archive\.ubuntu\.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/apt-mirrors.txt
+          fi
+          printf '%s\n' 'Acquire::Retries "2";' 'Acquire::http::Timeout "30";' 'Acquire::https::Timeout "30";' | sudo tee /etc/apt/apt.conf.d/80-browser-downloads > /dev/null
+          npx playwright install --with-deps chromium
 
       - name: Check production browser experience
         run: npm run test:e2e
