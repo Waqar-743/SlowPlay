@@ -817,8 +817,9 @@ export function createIslandScene(container, { input, onSnapshot, onNotice, redu
     // Tablets also need the clear space to the right of the progress panel.
     const narrowSky = camera.aspect < 1.3
     const tallSky = camera.aspect < 0.8
-    const moonLateral = narrowSky ? 26 : -40
-    const sunLateral = narrowSky ? 30 : -60
+    const compactSky = narrowSky && container.clientWidth < 340
+    const moonLateral = narrowSky ? (compactSky ? 20 : 26) : -40
+    const sunLateral = narrowSky ? (compactSky ? 24 : 30) : -60
     moon.position.copy(camera.position).addScaledVector(cameraForward, 210)
     moon.position.x += Math.cos(cameraHeading) * moonLateral
     moon.position.z += Math.sin(cameraHeading) * moonLateral
