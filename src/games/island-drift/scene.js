@@ -70,6 +70,8 @@ export function createIslandScene(container, { input, onSnapshot, onNotice, redu
   let state = createBoatState()
   let targetNight = mode === 'night' ? 1 : 0
   let night = targetNight
+  let modeTransitionFrom = night
+  let modeTransitionAt = performance.now()
   let elapsed = 0
   let snapshotAt = 0
   let noticeAt = -8
@@ -709,7 +711,10 @@ export function createIslandScene(container, { input, onSnapshot, onNotice, redu
     const dt = Math.min((now - previous) / 1000, 0.05)
     previous = now
     if (active) elapsed += dt
-    night = THREE.MathUtils.damp(night, targetNight, 3.6, dt)
+    // Lighting follows wall time so a slow frame cannot stretch a short mode
+    // transition. Boat physics still uses the separately clamped safe step.
+    const modeProgress = reducedMotion ? 1 : THREE.MathUtils.clamp((now - modeTransitionAt) / 1000, 0, 1)
+    night = THREE.MathUtils.lerp(modeTransitionFrom, targetNight, modeProgress * modeProgress * (3 - 2 * modeProgress))
     sky.material.uniforms.night.value = night
     water.material.uniforms.night.value = night
     water.material.uniforms.time.value = reducedMotion ? 0 : elapsed
@@ -831,7 +836,13 @@ export function createIslandScene(container, { input, onSnapshot, onNotice, redu
   frame = requestAnimationFrame(animate)
   return {
     setActive(value) { active = value },
-    setMode(value) { targetNight = value === 'night' ? 1 : 0 },
+    setMode(value) {
+      const nextNight = value === 'night' ? 1 : 0
+      if (nextNight === targetNight) return
+      modeTransitionFrom = night
+      modeTransitionAt = performance.now()
+      targetNight = nextNight
+    },
     setReducedMotion(value) { reducedMotion = value },
     reset({ preserveVoyage = false } = {}) { const previousState = state; state = createBoatState(); if (preserveVoyage) { state.distance = previousState.distance; state.sectors = previousState.sectors } else elapsed = 0; noticeAt = -8; steeringPose = 0; cameraCheckTime = -1; cameraLift = 0; boat.position.set(state.x, 0.27, state.z); boat.rotation.set(0, -state.heading, 0); updateSailor(); snapCamera(); wake.forEach((p) => { p.userData.age = 100; p.visible = false }); spray.forEach((p) => { p.userData.age = 100; p.visible = false }); onSnapshot({ ...state, elapsed, running: active, mode: targetNight > 0.5 ? 'night' : 'day' }) },
     getState() {
