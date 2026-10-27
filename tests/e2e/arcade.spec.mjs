@@ -25,6 +25,9 @@ const openIsland = async (page) => {
 }
 
 test('catalogue, filters, About, images and lazy game loading use the production base path', async ({ page }) => {
+  // A full-page PNG of the painted catalogue can take over 20 seconds on the
+  // software-rendered Windows runner; keep that capture within this test's budget.
+  test.setTimeout(90_000)
   const failures = []
   const gameRequests = []
   page.on('pageerror', (error) => failures.push(error.message))

@@ -2,6 +2,10 @@ import { test, expect } from '@playwright/test'
 import { mkdir } from 'node:fs/promises'
 import path from 'node:path'
 
+// Logic regressions use fewer software-rendered pixels; the dedicated close
+// camera review and the explicit multi-touch context retain DPR 1.
+test.use({ deviceScaleFactor: 0.5 })
+
 const outputDirectory = process.env.ISLAND_QA_OUTPUT_DIR || 'test-results/screenshots'
 const state = (page) => page.evaluate(() => window.__islandDrift?.getState())
 const saveScreenshot = async (page, name) => {
