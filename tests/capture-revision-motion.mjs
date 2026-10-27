@@ -15,7 +15,7 @@ const read = () => page.evaluate(() => window.__islandDrift?.getState())
 const frames = []
 const saveFrame = async (name) => {
   const snapshot = await read()
-  frames.push({ name, elapsed: snapshot.elapsed, x: snapshot.x, z: snapshot.z, heading: snapshot.heading, speed: snapshot.speed, mode: snapshot.mode, framing: snapshot.framing, camera: snapshot.camera })
+  frames.push({ name, elapsed: snapshot.elapsed, x: snapshot.x, z: snapshot.z, heading: snapshot.heading, speed: snapshot.speed, mode: snapshot.mode, lighting: snapshot.lighting, framing: snapshot.framing, camera: snapshot.camera })
   await page.screenshot({ path: path.join(outputDirectory, `island-drift-motion-${name}.png`) })
 }
 
@@ -34,7 +34,7 @@ try {
   await page.waitForTimeout(900)
   await saveFrame('day-wake')
   await page.getByRole('button', { name: 'Switch to night mode', exact: true }).click()
-  await page.waitForTimeout(1800)
+  await page.waitForFunction(() => window.__islandDrift?.getState().lighting.nightBlend > 0.99)
   await saveFrame('night-sailing')
   await page.keyboard.down('ArrowRight')
   await page.waitForTimeout(1700)
