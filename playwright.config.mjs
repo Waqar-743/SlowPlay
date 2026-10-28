@@ -7,7 +7,7 @@ export default defineConfig({
   expect: { timeout: 8_000 },
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: 'http://127.0.0.1:4173/rock-paper-scissors-game/',
+    baseURL: 'http://127.0.0.1:4173/SlowPlay/',
     channel: process.env.CI ? undefined : 'chrome',
     viewport: { width: 1440, height: 900 },
     deviceScaleFactor: 1,
@@ -16,7 +16,7 @@ export default defineConfig({
   },
   webServer: {
     command: 'npm run preview -- --host 127.0.0.1 --port 4173',
-    url: 'http://127.0.0.1:4173/rock-paper-scissors-game/',
+    url: 'http://127.0.0.1:4173/SlowPlay/',
     reuseExistingServer: !process.env.CI,
     timeout: 30_000,
   },
