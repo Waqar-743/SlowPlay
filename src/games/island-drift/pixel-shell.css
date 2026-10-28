@@ -1,0 +1,84 @@
+/* Arcade chrome shares the forest palette. The painted 3D world keeps its
+   own art direction; all stage dimensions and camera settings stay intact. */
+.id-game{--id-ink:#f2ffe0;--id-teal:#c8ff4d;--id-paper:#112c20;--id-border:#426346;font-family:var(--ui-font);color:var(--id-ink)}
+.id-game button:focus-visible,.id-game input:focus-visible{outline:3px solid #c8ff4d;outline-offset:4px}
+.id-back,.id-help-link{color:#f2ffe0;font-size:13px!important}
+.id-back:hover,.id-help-link:hover{color:#c8ff4d}
+.id-edition,.id-bottom-note,.id-bottom-note>span:last-child{color:#a9bea5}
+.id-edition,.id-bottom-note>span:first-child{font-family:var(--pixel-label);letter-spacing:0;font-size:10px}
+.id-intro{background:#153725;border:3px solid #729156;border-radius:0;box-shadow:7px 7px 0 #071b13}
+.id-intro-art{background:#1d503d}
+.id-intro-copy .eyebrow{font-family:var(--pixel-label);color:#c8ff4d;font-size:10px;letter-spacing:0;line-height:1.8}
+.id-intro-copy h1{font-family:var(--pixel-display);font-size:clamp(23px,2.65vw,38px);letter-spacing:-.06em;line-height:1.6;white-space:normal;text-shadow:3px 3px 0 #071b13}
+.id-intro-copy h1 em,.id-game-heading h1 em{color:#c8ff4d;font-style:normal}
+.id-title-mark{display:none}
+.id-lede{font-family:var(--pixel-body);font-size:32px;line-height:1.05;letter-spacing:0;color:#f2ffe0}
+.id-intro-description{font-size:14px;line-height:1.8;color:#c1d3b7}
+.id-start{font-family:var(--pixel-label)!important;font-size:12px!important;padding:15px 18px!important;border-radius:0!important}
+.id-start-row>span{color:#b8cda8;font-size:9px}
+.id-intro-features{border-color:#416344}
+.id-intro-features>span{color:#c1d3b7;font-size:12px}
+.id-art-caption{background:#0b2016ed;color:#efffdb;border:2px solid #84a369;backdrop-filter:none;border-radius:0;font-family:var(--pixel-label);font-size:9px;letter-spacing:0}
+.id-live-dot{background:#c8ff4d;border-radius:0}
+.id-intro-mode{background:#0b2016ec;border:2px solid #84a369;backdrop-filter:none;border-radius:0}
+.id-intro-mode button{border-radius:0;color:#e4f3d4;font-family:var(--pixel-label);font-size:11px}
+.id-intro-mode .is-selected{background:#c8ff4d;color:#0b2016}
+.id-game-heading h1,.id-launched .id-game-heading h1{font-family:var(--pixel-display);font-size:20px;line-height:1.6;letter-spacing:-.05em}
+.id-game-heading .eyebrow{color:#b2c59e}
+.id-voyage-label,.id-voyage-label small{color:#b8cda8}
+.id-stage,.id-launched .id-stage{border:2px solid #729156;border-radius:0}
+.id-hud,.id-launched .id-hud{background:#0b2419ed;border:2px solid #93b56a;border-radius:0;box-shadow:3px 3px 0 #071b1373;color:#efffdb;backdrop-filter:none}
+.id-hud-label{color:#efffdb}
+.id-lap-note{color:#c0d1af}
+.id-progress-track,.id-launched .id-progress-track{background:#3e5d41;border-radius:0}
+.id-progress-track>span,.id-launched .id-progress-track>span,.id-launched.id-night .id-progress-track>span{background:#c8ff4d}
+.id-launched .id-lap-note{color:#c0d1af}
+.id-tool{background:#0b2419f0;border:2px solid #97b36e;color:#efffdb;border-radius:0;backdrop-filter:none;box-shadow:2px 2px 0 #071b1390}
+.id-tool:hover{background:#315239;color:#c8ff4d}
+.id-control-deck{background:#153725;border:2px solid #729156;border-top:0;border-radius:0}
+.id-control-label{color:#b8cda8;font-family:var(--pixel-label);letter-spacing:0}
+.id-control{border:2px solid #8baa61;background:#244931;color:#f2ffe0;border-radius:0;box-shadow:3px 3px 0 #071b13}
+.id-control.is-held{background:#42643c;box-shadow:1px 1px 0 #071b13}
+.id-throttle{background:#c8ff4d;border-color:#c8ff4d;color:#0b2016}
+.id-throttle.is-held{background:#abd440}
+.id-deck-message,.id-deck-message p{color:#e5f2d4}
+.id-deck-message p{font-family:var(--pixel-body);font-size:24px;letter-spacing:0}
+.id-deck-message p>span{font-family:var(--ui-font);font-size:11px;color:#b8cda8}
+.id-voyage-footer,.id-voyage-footer strong,.id-voyage-footer button{color:#c0d1af}
+.id-voyage-footer strong{color:#efffdb}
+.id-notice{background:#102c1fef;border:2px solid #9abb71;color:#efffdb;border-radius:0;box-shadow:3px 3px 0 #071b1366}
+.id-pause-scrim{background:#061d1680}
+.id-pause-card{background:#153725;border:3px solid #9abb71;border-radius:0;color:#efffdb;box-shadow:7px 7px 0 #071b13}
+.id-pause-card h2{font-family:var(--pixel-display);font-size:21px;letter-spacing:-.05em;line-height:1.6}
+.id-pause-card .eyebrow{font-family:var(--pixel-label);color:#c8ff4d;font-size:9px;letter-spacing:0}
+.id-pause-card p,.id-text-button{color:#c1d3b7}
+.id-dialog-scrim{background:#061d16a6}
+.id-dialog{background:#153725;border:3px solid #9abb71;border-radius:0;color:#efffdb;box-shadow:7px 7px 0 #071b13}
+.id-dialog .eyebrow{color:#c8ff4d;font-family:var(--pixel-label);letter-spacing:0;line-height:1.8}
+.id-dialog h2{font-family:var(--pixel-display);font-size:23px;line-height:1.6;letter-spacing:-.05em}
+.id-help-body p,.id-help-body dl,.id-help-body dd,.id-help-body .id-help-tip{color:#d0dfbf}
+.id-help-body dl>div,.id-setting,.id-motion-note{border-color:#486744}
+.id-help-body dt{color:#c8ff4d}
+.id-help-body>img{border-radius:0;border:2px solid #97b36e}
+.id-setting strong{color:#efffdb}
+.id-setting span,.id-dialog .id-saved-note,.id-motion-note p{color:#bbd0aa}
+.id-setting-modes>button{border:2px solid #8baa61;border-radius:0;background:#244931;color:#efffdb}
+.id-setting-modes>button.is-selected{background:#c8ff4d;color:#0b2016;border-color:#c8ff4d}
+.id-setting input{accent-color:#c8ff4d}
+.id-saved-note{border-color:#486744}
+.id-launched .id-control-deck{background:#153725;border-color:#729156;border-radius:0}
+.id-launched .id-control-label{color:#b8cda8}
+.id-launched .id-control{border-color:#8baa61;background:#244931;color:#f2ffe0;border-radius:0}
+.id-launched .id-control.is-held{background:#42643c;box-shadow:1px 1px 0 #071b13}
+.id-launched .id-throttle{background:#c8ff4d;border-color:#c8ff4d;color:#0b2016}
+.id-launched .id-throttle.is-held{background:#abd440;color:#0b2016}
+.id-launched .id-tool,.id-launched.id-night .id-hud-actions .id-tool{background:#0b2419f0;border-color:#97b36e;color:#efffdb;border-radius:0}
+.id-launched .id-tool:hover,.id-launched.id-night .id-hud-actions .id-tool:hover{background:#315239;color:#c8ff4d}
+.id-launched .id-deck-message p{color:#e5f2d4;font-family:var(--pixel-body);font-size:24px}
+.id-launched .id-deck-message p>span{color:#b8cda8;font-family:var(--ui-font);font-size:11px}
+.id-launched.id-night .id-hud{color:#efffdb;background:#0b2419ed;border-color:#93b56a}
+.id-launched.id-night .id-stage{border-color:#729156}
+.id-launched.id-night .id-progress-track{background:#3e5d41}
+@media(max-width:800px){.id-intro-copy h1{font-size:26px}.id-intro-copy .eyebrow{font-size:9px}.id-lede{font-size:29px}.id-intro-description{font-size:13px}.id-start{font-size:11px!important}}
+@media(max-width:590px){.id-intro-copy h1{font-size:29px;margin:14px 0 18px}.id-intro-copy{padding:26px 22px}.id-intro-description{font-size:13px}.id-intro-features>span{font-size:12px}.id-intro-mode button{font-size:10px}.id-art-caption{font-size:8px}.id-lede{font-size:30px}.id-game-heading h1,.id-launched .id-game-heading h1{font-size:18px}.id-pause-card h2{font-size:18px}.id-dialog h2{font-size:20px}.id-launched .id-hud-label{font-size:9px}.id-dialog .eyebrow{font-size:8px}.id-help-body p{font-size:13px;line-height:1.7}.id-help-body .id-help-tip{font-size:12px}.id-help-body dl>div{font-size:12px}.id-setting strong{font-size:13px}.id-setting span{font-size:12px}.id-control-label,.id-launched .id-control-label{font-family:var(--ui-font)}}
+@media(max-width:374px){.id-intro-copy h1{font-size:26px}.id-start{font-size:10px!important;padding:13px!important}.id-start-row{gap:12px}.id-start-row>span{font-size:7px}.id-intro-copy .eyebrow{font-size:8px}.id-game-heading h1,.id-launched .id-game-heading h1{font-size:16px}}

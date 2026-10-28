@@ -3,6 +3,7 @@ import Icon from '../../components/Icon'
 import { createIslandScene } from './scene'
 import { createBoatState, SECTOR_COUNT } from './physics'
 import './island-drift.css'
+import './pixel-shell.css'
 
 const ART = `${import.meta.env.BASE_URL}art/`
 const PREFS_KEY = 'slow-arcade-island-preferences'

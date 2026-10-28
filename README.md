@@ -62,7 +62,9 @@ Three.js is loaded only when Island Drift opens. Scene destruction cancels anima
 
 ## Artwork
 
-All nine raster assets were generated with the built-in image tool in a consistent watercolor/gouache style and optimized to WebP. Day and night share the same composition. The instruction map follows the actual island's horizontal layout, southern cove, northeast lighthouse and central/western palms. Prompts and the asset manifest are in `public/art/ART-DIRECTION.md`. Interface icons use a consistent custom SVG stroke style.
+The arcade interface takes its pixel forest, lime-and-cream palette, square frames and typography direction from [Pixel Sword by diiviikk5](https://github.com/diiviikk5/Hacktemplates/tree/main/templates/pixel-sword). The forest poster is included under its MIT license in `public/art/pixel/`. The library uses a static poster with sparse CSS fireflies instead of a second WebGL scene, and decorative animation follows reduced-motion preferences. Press Start 2P, Silkscreen and VT323 are self-hosted with their SIL Open Font License notices in `public/fonts/`. No external font requests are required.
+
+Island Drift's nine raster assets were generated with the built-in image tool in a consistent watercolor/gouache style and optimized to WebP. Day and night share the same composition. The instruction map follows the actual island's horizontal layout, southern cove, northeast lighthouse and central/western palms. Prompts and the asset manifest are in `public/art/ART-DIRECTION.md`. Interface icons use a consistent custom SVG stroke style.
 
 ## GitHub Pages
 

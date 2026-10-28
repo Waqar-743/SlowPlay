@@ -1,6 +1,7 @@
 import { Component, lazy, Suspense, useEffect, useRef, useState } from 'react'
 import Icon from './components/Icon'
 import GameArtwork from './components/GameArtwork'
+import PixelBackdrop from './components/PixelBackdrop'
 import { categories, games } from './data/games'
 
 const IslandDrift = lazy(() => import('./games/island-drift/IslandDrift.jsx'))
@@ -54,20 +55,22 @@ export default function App() {
   const back = () => { restoreLibraryFocus.current = true; setRoute('library'); window.location.hash = '/' }
   if (route === 'island-drift') return <GameBoundary onBack={back}><Suspense fallback={<main className="load-screen" aria-busy="true"><Icon name="compass" size={42}/><h1>Finding your island…</h1><p>Gathering the boat, the sea, and a little sunshine.</p><div className="loading-paint"/></main>}><IslandDrift onBack={back}/></Suspense></GameBoundary>
   const visibleGames = games.filter(game => category === 'All games' || game.categories.includes(category))
-  return <>
+  return <div className="arcade-site">
     <a className="skip-link" href="#games">Skip to games</a>
     <header className="site-header page-width">
       <a className="wordmark" href="#/" aria-label="Slowplay home"><span className="brand-mark"><Icon name="compass" size={24}/></span>slowplay<span className="brand-period">.</span></a>
       <nav aria-label="Main navigation"><a className="nav-link" href="#games">The games</a><button className="nav-link" onClick={() => dialogRef.current.showModal()}>Our little world <Icon name="arrow-right" size={15}/></button></nav>
-      <span className="header-note"><span/> Made for a moment off.</span>
+      <span className="header-note"><span/> A good place to get lost.</span>
     </header>
     <main className="page-width">
       <section className="intro" aria-labelledby="library-heading">
-        <div><p className="eyebrow"><span className="small-line"/> Your pocket-sized escape</p><h1 id="library-heading" tabIndex={-1} ref={headingRef}>A little play.<br/><span>A little escape.</span></h1></div>
-        <div className="intro-aside"><Icon name="wind" size={34}/><p>Small games. Slow moments. <br/>Find something you love, <br/>and stay a little while.</p><a href="#games" className="inline-link">Find your next game <Icon name="down" size={17}/></a></div>
+        <PixelBackdrop/>
+        <div className="intro-copy"><p className="eyebrow"><span className="availability-dot"/> Browser arcade · No downloads</p><h1 id="library-heading" tabIndex={-1} ref={headingRef}>A little play.<br/><span>A little escape.</span></h1><p className="intro-lede">Step out of the everyday.<br/>Small games. New worlds. Your own pace.</p><div className="intro-actions"><button className="button button-primary" onClick={openGame}><Icon name="play" size={18}/> Play Island Drift</button><a href="#games" className="inline-link">Find your next game <Icon name="down" size={18}/></a></div></div>
+        <div className="intro-aside"><span className="hero-coordinate" aria-hidden="true">35° N / 140° E</span><span className="hero-status"><Icon name="compass" size={20}/> WORLD 01 IS OPEN</span><p>One island. An open sea.<br/>No finish line.</p></div>
+        <div className="hero-bottom"><span>PRESS PLAY. TAKE YOUR TIME.</span><span>01 READY / 05 IN THE WORKS <Icon name="down" size={14}/></span></div>
       </section>
       <section className="featured" aria-labelledby="featured-title">
-        <div className="featured-copy"><p className="eyebrow"><span className="availability-dot"/> First escape · Now playing</p><span className="feature-number">01 / THE COLLECTION</span><h2 id="featured-title">Island<br/><em>Drift</em><span className="title-star"><Icon name="sun" size={44}/></span></h2><p>Leave the rush on shore. Take the helm of a wooden boat and find your own way around a sun-washed island.</p><div className="feature-tags"><span>Exploration</span><span>At your own pace</span></div><button className="button button-primary feature-play" onClick={openGame}><Icon name="play" size={18}/> Play Island Drift <Icon name="arrow-right" size={20}/></button><span className="feature-footnote">Free to wander. Nothing to win.</span></div>
+        <div className="featured-copy"><p className="eyebrow"><span className="availability-dot"/> First escape · Now playing</p><span className="feature-number">01 / THE COLLECTION</span><h2 id="featured-title">Island<br/><em>Drift</em><span className="title-star"><Icon name="sun" size={36}/></span></h2><p>Leave the rush on shore. Take the helm of a wooden boat and find your own way around a sun-washed island.</p><div className="feature-tags"><span>Exploration</span><span>At your own pace</span></div><button className="button button-primary feature-play" onClick={openGame}><Icon name="play" size={18}/> Set course <Icon name="arrow-right" size={20}/></button><span className="feature-footnote">Free to wander. Nothing to win.</span></div>
         <button className="featured-art" onClick={openGame} aria-label="Play Island Drift from painting"><img src={`${art}island-day.webp`} alt="Watercolor painting of a man steering a wooden boat beside a palm-covered island" fetchPriority="high"/><span className="art-corner"><Icon name="sun" size={17}/> A change of scenery</span><span className="art-play"><Icon name="play" size={25}/></span><span className="art-caption">One island. Endless little discoveries.</span></button>
       </section>
       <section className="library-section" id="games" aria-labelledby="collection-title">
@@ -78,9 +81,9 @@ export default function App() {
           <div className="card-meta"><span>{game.genre}</span><span>{game.players}</span></div><div className="card-title-row"><h3>{game.name}</h3>{game.ready ? <button className="card-play" onClick={openGame}>Play <Icon name="arrow-right" size={17}/></button> : <span className="planned-label">Coming later</span>}</div><p>{game.description}</p>
         </article>)}</div>
       </section>
-      <section className="closing-note"><Icon name="anchor" size={27}/><p>No leaderboard to chase.<br/><strong>Just a good place to spend a little time.</strong></p><span className="closing-flourish" aria-hidden="true">~</span></section>
+      <section className="closing-note"><span className="closing-icon"><Icon name="anchor" size={27}/></span><p>No leaderboard to chase.<br/><strong>Just a good place to spend a little time.</strong></p><span className="closing-flourish" aria-hidden="true">[ ESC ]</span></section>
     </main>
     <footer className="site-footer page-width"><a className="wordmark footer-brand" href="#/">slowplay.</a><span>A small collection. A slower pace.</span><button className="text-button" onClick={() => dialogRef.current.showModal()}>About this arcade <Icon name="arrow-right" size={14}/></button></footer>
     <AboutDialog dialogRef={dialogRef}/>
-  </>
+  </div>
 }
