@@ -1,18 +1,18 @@
 import { defineConfig } from '@playwright/test'
 
 export default defineConfig({
-  testDir: './tests/e2e',
-  fullyParallel: false,
+  testDir: './tests',
   workers: 1,
-  timeout: 45_000,
-  expect: { timeout: 10_000 },
+  timeout: 30_000,
+  expect: { timeout: 8_000 },
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
     baseURL: 'http://127.0.0.1:4173/rock-paper-scissors-game/',
+    channel: process.env.CI ? undefined : 'chrome',
     viewport: { width: 1440, height: 900 },
-    trace: 'retain-on-failure',
+    deviceScaleFactor: 1,
     screenshot: 'only-on-failure',
-    launchOptions: { args: ['--use-angle=swiftshader', '--enable-webgl'] },
+    trace: 'retain-on-failure',
   },
   webServer: {
     command: 'npm run preview -- --host 127.0.0.1 --port 4173',

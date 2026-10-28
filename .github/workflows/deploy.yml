@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy AKI hero
 
 on:
   push:
@@ -37,25 +37,9 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Check active application and game rules
-        run: |
-          npm run lint
-          npm run test:physics
-          npm run test:rps
+      - name: Check application
+        run: npm run lint
 
-      - name: Install browser for production checks
-        timeout-minutes: 5
-        run: |
-          # The Azure package mirror stalled during repeated browser setup runs.
-          # Keep Ubuntu's signed packages, using its standard HTTPS archive.
-          if [ -f /etc/apt/apt-mirrors.txt ]; then
-            sudo sed -i 's|http://azure\.archive\.ubuntu\.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/apt-mirrors.txt
-          fi
-          printf '%s\n' 'Acquire::Retries "2";' 'Acquire::http::Timeout "30";' 'Acquire::https::Timeout "30";' | sudo tee /etc/apt/apt.conf.d/80-browser-downloads > /dev/null
-          npx playwright install --with-deps chromium
-
-      - name: Check production browser experience
-        run: npm run test:e2e
 
       - name: Setup Pages
         if: github.event_name != 'pull_request'

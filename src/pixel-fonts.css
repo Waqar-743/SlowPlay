@@ -1,4 +1,0 @@
-@font-face{font-family:'Press Start 2P';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/press-start-2p.ttf') format('truetype')}
-@font-face{font-family:'Silkscreen';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/silkscreen.ttf') format('truetype')}
-@font-face{font-family:'VT323';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/vt323.ttf') format('truetype')}
-:root{--pixel-display:'Press Start 2P',monospace;--pixel-label:'Silkscreen',monospace;--pixel-body:'VT323',monospace;--ui-font:Arial,Helvetica,sans-serif}
