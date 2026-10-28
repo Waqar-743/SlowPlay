@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test:physics": "node --test tests/physics.test.mjs",
+    "test:rps": "node --test tests/rps.test.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {

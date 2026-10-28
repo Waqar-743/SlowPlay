@@ -46,6 +46,10 @@ button:active:not(:disabled) { transform: translate(2px, 2px); }
 .intro h1 > span { color: #c8ff4d; }
 .intro-lede { font-size: 26px; line-height: 1.3; color: #e1edce; margin-top: 24px; max-width: 520px; }
 .intro-actions { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-top: 30px; }
+.intro-actions .hero-duel{font-size:10px;min-height:50px}
+@media(min-width:768px){.intro-actions .inline-link{flex-basis:100%;width:max-content;max-width:max-content}.intro-aside{bottom:78px}}
+@media(max-width:767px){.intro{padding-bottom:145px!important;min-height:650px!important}.intro-actions .hero-duel{font-size:9px;padding-inline:12px}}
+@media(max-width:374px){.intro-actions .hero-duel{font-size:8px}}
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 11px; min-height: 50px; padding: 14px 21px; border: 3px solid #07160d; border-radius: 0; font-family: var(--pixel-label, monospace); font-size: 12px; font-weight: 400; box-shadow: 4px 4px 0 #04120b; transition: background .15s, color .15s, transform .15s, box-shadow .15s; }
 .button-primary { background: #c8ff4d; color: #15230c; }
 .button-primary:hover { background: #e2ff99; box-shadow: 6px 6px 0 #04120b; transform: translate(-1px, -1px); }

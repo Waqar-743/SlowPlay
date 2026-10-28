@@ -37,10 +37,11 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Check active application and physics
+      - name: Check active application and game rules
         run: |
           npm run lint
           npm run test:physics
+          npm run test:rps
 
       - name: Install browser for production checks
         timeout-minutes: 5

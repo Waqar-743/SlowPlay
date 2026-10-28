@@ -36,7 +36,7 @@ test('catalogue, filters, About, images and lazy game loading use the production
   await page.goto('./')
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(/A little play/)
   await expect(page.locator('.game-card')).toHaveCount(6)
-  await expect(page.getByText('Coming later', { exact: true })).toHaveCount(5)
+  await expect(page.getByText('Coming later', { exact: true })).toHaveCount(4)
   expect(gameRequests).toHaveLength(0)
   await page.getByRole('link', { name: 'Find your next game', exact: true }).click()
   await expect.poll(() => page.locator('#games').evaluate((element) =>

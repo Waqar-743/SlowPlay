@@ -1,6 +1,6 @@
 # Slowplay arcade
 
-A responsive React + Vite browser arcade. **Island Drift is the first playable release.** The catalogue includes the complete six-game roadmap; the other five games are deliberately marked as future releases. The original Rock Paper Scissors source is preserved verbatim in `src/games/rock-paper-scissors/` for its separately approved upgrade.
+A responsive React + Vite browser arcade. **Island Drift and Rock Paper Scissors are playable.** The catalogue includes the complete six-game roadmap; four games remain future releases. Each playable game loads its own module when opened. The original Rock Paper Scissors files remain archived beside its new implementation.
 
 ## Run locally
 
@@ -11,7 +11,21 @@ npm ci
 npm run dev
 ```
 
-Open the address printed by Vite, including `/rock-paper-scissors-game/`. Open `#/island-drift` to go directly to Island Drift. Hash navigation works on static GitHub Pages and survives refreshing a game URL.
+Open the address printed by Vite, including `/rock-paper-scissors-game/`. Open `#/island-drift` or `#/rock-paper-scissors` to go directly to a game. Hash navigation works on static GitHub Pages and survives refreshing a game URL.
+
+## Rock Paper Scissors
+
+A best-of-five hand duel against the computer, styled to match the pixel forest arcade. Original SVG hand gestures appear in the arena, choices, illustrated rules and library card.
+
+- First to three decisive round wins takes the match. Ties replay without consuming a round.
+- Choose with the large Rock, Paper and Scissors buttons, or press **1 / R**, **2 / P**, **3 / S**. Use Tab and Enter to reach every control.
+- Optional player names support up to 18 characters; a blank name plays as **You**.
+- Results remain visible until **Next round**. Once a side reaches three wins, **Play again** starts another match.
+- The current match win streak and personal best persist. Winning a completed match extends the streak; losing resets the current streak.
+- Restart resets the active match. Names, sound preference, streaks and supported match progress stay in local browser storage. Reload or return from the library to resume.
+- Sound is optional and starts off. Short synthesized feedback tones require a player action. The audio context closes when leaving the game.
+
+Saved matches are reconstructed from valid choices rather than trusting stored scores. Invalid storage falls back safely. This turn-based game has no clock; decorative motion respects reduced-motion settings.
 
 ## Island Drift
 
@@ -37,6 +51,7 @@ The game requires WebGL. An inline recovery message appears when the renderer ca
 ```sh
 npm run lint
 npm run test:physics
+npm run test:rps
 npm run build
 npx playwright install chromium
 npm run test:e2e
@@ -44,7 +59,7 @@ npm run test:e2e
 
 The physics suite checks acceleration, coasting, braking, reverse, steering, shoreline and rock recovery, a continuous full coastline lap, world-boundary recovery and frame-spike handling. Browser tests run against the **production build** with the GitHub Pages base path. They cover session flow, keyboard/touch controls, focus, filters, asset requests, modes, persistence, cleanup, and representative desktop/tablet/phone viewports. These are simulated mobile checks; they do not certify performance or behavior on physical phones.
 
-The legacy Rock Paper Scissors directory is excluded from current lint because it is preserved source, outside this stage's authorized implementation. All active application, game, and QA code remains checked.
+Only the archived original Rock Paper Scissors files are excluded from lint. All active game modules, interface components and rules remain checked. The Rock Paper Scissors rules suite checks all nine hand pairings, first-to-three scoring, ties, locking and saved-state validation; browser checks cover complete matches, streaks, inputs, persistence and responsive layouts.
 
 ## Project structure
 
@@ -54,7 +69,7 @@ The legacy Rock Paper Scissors directory is excluded from current lint because i
 | `src/App.jsx` | Library, hash navigation, lazy loading, error boundary and About dialog |
 | `src/components/` | Shared custom SVG symbols and future-game illustrations |
 | `src/games/island-drift/` | Isolated game UI, Three.js scene, physics and game styles |
-| `src/games/rock-paper-scissors/` | Preserved original source; not loaded by the arcade |
+| `src/games/rock-paper-scissors/` | Hand duel, custom SVG gestures, rules, styles and archived original files |
 | `public/art/` | Optimized original paintings, materials and art provenance |
 | `tests/` | Independent physics and production browser checks |
 
@@ -73,7 +88,7 @@ Island Drift's nine raster assets were generated with the built-in image tool in
 ## Roadmap and approval boundary
 
 1. **Island Drift:** this release.
-2. **Rock Paper Scissors:** best-of-five, streaks, optional names and accessible controls.
+2. **Rock Paper Scissors:** playable best-of-five, streaks, optional names and accessible controls.
 3. **Tic-Tac-Toe:** computer opponent, local two-player, turn indicators and restart.
 4. **Memory Match:** difficulties, move counter, timer and personal bests.
 5. **Snake:** speeds, scoring, pause, keyboard and mobile controls.

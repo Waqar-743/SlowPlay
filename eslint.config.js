@@ -5,8 +5,8 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  // The original game is preserved verbatim until its separate implementation is authorized.
-  globalIgnores(['dist', 'src/games/rock-paper-scissors/**', 'test-results', 'playwright-report']),
+  // Keep archived original files while checking every active game module.
+  globalIgnores(['dist', 'src/games/rock-paper-scissors/LegacyGame.jsx', 'src/games/rock-paper-scissors/SplashCursor.jsx', 'test-results', 'playwright-report']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [
