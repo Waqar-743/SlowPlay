@@ -40,6 +40,20 @@ jobs:
       - name: Check application
         run: npm run lint
 
+      - name: Install browser
+        timeout-minutes: 5
+        run: |
+          if [ -f /etc/apt/apt-mirrors.txt ]; then
+            sudo sed -i 's|http://azure\.archive\.ubuntu\.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/apt-mirrors.txt
+          fi
+          printf '%s\n' 'Acquire::Retries "2";' 'Acquire::http::Timeout "30";' 'Acquire::https::Timeout "30";' | sudo tee /etc/apt/apt.conf.d/80-browser-downloads > /dev/null
+          npx playwright install --with-deps chromium
+
+      - name: Verify hero
+        run: npm run test:e2e
+        env:
+          HERO_QA_DIR: test-results/hero
+
 
       - name: Setup Pages
         if: github.event_name != 'pull_request'
