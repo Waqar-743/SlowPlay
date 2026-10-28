@@ -708,7 +708,7 @@ export function createIslandScene(container, { input, onSnapshot, onNotice, redu
   function animate(now) {
     if (destroyed) return
     frame = requestAnimationFrame(animate)
-    const dt = Math.min((now - previous) / 1000, 0.05)
+    const dt = THREE.MathUtils.clamp((now - previous) / 1000, 0, 0.05)
     previous = now
     if (active) elapsed += dt
     // Lighting follows wall time so a slow frame cannot stretch a short mode
