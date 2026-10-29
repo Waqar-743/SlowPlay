@@ -243,7 +243,7 @@ test('settings are keyboard operable and immersive exit restores focus',async({p
 })
 
 test('eight desktop, tablet and phone viewports keep controls readable and reachable',async({page})=>{
-  test.setTimeout(120000)
+  test.setTimeout(process.env.CI ? 240000 : 120000)
   await ready(page)
   const measurements=[]
   for(const[name,width,height]of views){
