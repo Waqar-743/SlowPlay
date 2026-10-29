@@ -1,5 +1,5 @@
 const MAPLE = 'M32 5 37 22 45 13 44 28 58 23 51 37 62 40 42 49 34 46 33 59 30 59 30 46 23 49 3 40 14 37 7 23 21 28 20 13 28 22Z'
-const COLORS = ['#a3291d', '#c44321', '#df6c2d', '#8c201a', '#b64126']
+const COLORS = ['#dd797e', '#c45467', '#efaa8d', '#923b50', '#d96b72']
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value))
 
 function createLeafSprites(image) {
@@ -52,7 +52,7 @@ export function createLandscape(root, canvas, initial) {
   function leaf(index, scattered = false) {
     const depth = 0.2 + Math.random() * 0.8
     return {
-      id: index, depth, x: width * (0.28 + Math.random() * 0.82),
+      id: index, depth, x: scattered ? Math.random() * width : -60 + Math.random() * width * 0.28,
       y: scattered ? Math.random() * height : -70 - Math.random() * height * 0.18,
       size: (8 + depth * depth * 35) * (index % 13 === 0 ? 1.5 : 1),
       speed: 15 + depth * 43, angle: Math.random() * Math.PI * 2,
@@ -71,19 +71,32 @@ export function createLandscape(root, canvas, initial) {
     const count = compact ? 25 : 52
     if (!leaves.length || leaves.length !== count) leaves = Array.from({ length: count }, (_, index) => leaf(index, true))
     else leaves.forEach(item => { item.x *= width / oldWidth; item.y *= height / oldHeight })
-    grass = Array.from({ length: compact ? 110 : 240 }, (_, index) => ({
-      x: width * index / (compact ? 109 : 239), y: height + Math.random() * 12,
-      height: (18 + Math.random() * 56) * (compact ? 0.7 : 1),
-      phase: Math.random() * 6.28, width: 0.5 + Math.random() * 1.2,
-      lean: (Math.random() - 0.5) * 24,
-      alpha: 0.13 + Math.random() * 0.35,
-    }))
+    const grassCount = compact ? 180 : 720
+    const imageScale = Math.max(width / 1672, height / 941)
+    const imageWidth = 1672 * imageScale, imageHeight = 941 * imageScale
+    const offsetX = (width - imageWidth) / 2, offsetY = (height - imageHeight) / 2
+    grass = Array.from({ length: grassCount }, (_, index) => {
+      const x = width * index / (grassCount - 1)
+      const imageX = (x - offsetX) / imageWidth
+      // Align the interactive field with the sloping meadow in the photograph.
+      const horizon = offsetY + imageHeight * (0.62 + imageX * 0.25)
+      const depth = Math.random()
+      const y = horizon + depth * (height + 10 - horizon)
+      return {
+        x, y, height: (9 + Math.random() * 32) * (0.45 + depth * 0.8),
+        phase: Math.random() * 6.28, width: 0.4 + Math.random() * 0.8,
+        lean: Math.random() * 5, bend: 0, alpha: 0.3 + Math.random() * 0.3,
+      }
+    })
     paint()
   }
   function grassSway(blade) {
     const breeze = Math.sin(elapsed * (0.9 + options.wind * 0.65) + blade.x * 0.009)
-    return (blade.lean - 3 - options.wind * 19 + breeze * (3 + options.wind * 13)
-      + Math.sin(elapsed * 1.8 + blade.phase) * 3) * blade.height / 80
+    const distance = pointer.active ? Math.hypot(blade.x - pointer.x, blade.y - blade.height * 0.5 - pointer.y) : Infinity
+    const influence = Math.max(0, 1 - distance / 115)
+    const touch = (blade.x < pointer.x ? -1 : 1) * influence * influence * 46
+    return (blade.lean + options.wind * 17 + breeze * (2 + options.wind * 5)
+      + Math.sin(elapsed * 1.8 + blade.phase) * 2) * blade.height / 40 + touch
   }
   function paint() {
     context.clearRect(0, 0, width, height)
@@ -99,7 +112,7 @@ export function createLandscape(root, canvas, initial) {
       context.restore()
     }
     for (const blade of grass) {
-      const sway = grassSway(blade)
+      const sway = blade.bend
       context.beginPath()
       context.moveTo(blade.x, blade.y)
       context.quadraticCurveTo(blade.x + sway * 0.15, blade.y - blade.height * 0.6,
@@ -145,13 +158,14 @@ export function createLandscape(root, canvas, initial) {
           interactions++
         }
       }
-      item.x += ((-10 - options.wind * 78) * item.depth
+      item.x += ((10 + options.wind * 78) * item.depth
         + Math.sin(elapsed * 0.7 + item.phase) * (7 + options.wind * 6) + item.ix) * dt
       item.y += (item.speed + Math.sin(elapsed * item.flutter + item.phase) * 9 + item.iy) * dt
       item.angle += item.spin * dt * (0.4 + options.wind)
       item.ix *= Math.exp(-dt * 2.8); item.iy *= Math.exp(-dt * 2.8)
       if (item.y > height + 80 || item.x < -90 || item.x > width + 140) leaves[index] = leaf(item.id)
     }
+    grass.forEach(blade => { blade.bend += (grassSway(blade) - blade.bend) * Math.min(1, dt * 8) })
     paint()
     frames++
     averageCost += (performance.now() - start - averageCost) * 0.06
@@ -159,6 +173,7 @@ export function createLandscape(root, canvas, initial) {
   function sync() {
     running = shouldRun()
     root.dataset.running = String(running)
+    root.style.setProperty('--breeze-duration', `${12 - options.wind * 7}s`)
     if (running && !raf) { last = performance.now(); raf = requestAnimationFrame(tick) }
     if (!running) { cancelAnimationFrame(raf); raf = 0; last = 0 }
   }
@@ -201,7 +216,7 @@ export function createLandscape(root, canvas, initial) {
     leafArtReady = true
     if (document.visibilityState !== 'hidden') paint()
   }
-  leafArt.src = `${import.meta.env.BASE_URL}art/maple-leaf.webp`
+  leafArt.src = `${import.meta.env.BASE_URL}hero/rose-leaf.svg`
   const diagnostics = Object.freeze({
     getState: () => ({
       frames, elapsed, running, hidden: document.visibilityState === 'hidden',
@@ -209,19 +224,20 @@ export function createLandscape(root, canvas, initial) {
       leafCount: leaves.length, grassCount: grass.length, interactions, leafArtReady,
       width, height, ratio, canvasWidth: canvas.width, canvasHeight: canvas.height,
       parallax: { x: pointer.sx, y: pointer.sy }, averageDrawMs: averageCost,
-      grassTip: grass[0] ? grass[0].x + grassSway(grass[0]) : 0,
+      grassTip: grass[0] ? grass[0].x + grass[0].bend : 0,
+      grassProbe: grass[Math.floor(grass.length * 0.23)] ? { ...grass[Math.floor(grass.length * 0.23)] } : null,
       leaves: leaves.filter(item => item.x > 15 && item.x < width - 15 && item.y > 15 && item.y < height - 15)
         .map(({ id, x, y, size, angle, depth }) => ({ id, x, y, size, angle, depth })),
     }),
   })
-  window.__akiScene = diagnostics
+  window.__mountainScene = diagnostics
   return {
     update,
     destroy() {
       disposed = true; cancelAnimationFrame(raf); abort.abort(); observer.disconnect()
       leafArt.onload = null
       context.clearRect(0, 0, width, height)
-      if (window.__akiScene === diagnostics) delete window.__akiScene
+      if (window.__mountainScene === diagnostics) delete window.__mountainScene
     },
   }
 }

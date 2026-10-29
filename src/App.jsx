@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { createLandscape } from './motion'
 import Icon from './Icon'
+import MountainScene from './MountainScene'
+import BrandMark from './BrandMark'
 
-const ART = `${import.meta.env.BASE_URL}art/`
-const KEY = 'aki-scene-preferences-v1'
+const KEY = 'skardu-mountain-scene-preferences-v1'
 function readPreferences() {
   try {
     const data = JSON.parse(localStorage.getItem(KEY))
@@ -22,7 +23,7 @@ export default function App() {
   const dialog = useRef(null), enterButton = useRef(null), exitButton = useRef(null)
   const settingsOpener = useRef(null), wasImmersive = useRef(false)
   const initial = useRef({ ...preferences, paused })
-  const windName = preferences.wind < 0.15 ? 'Calm' : preferences.wind < 0.6 ? 'Gentle breeze' : 'Autumn gusts'
+  const windName = preferences.wind < 0.15 ? 'Calm' : preferences.wind < 0.6 ? 'Gentle breeze' : 'Mountain gusts'
   const update = change => setPreferences(previous => ({ ...previous, ...change }))
 
   useEffect(() => {
@@ -61,35 +62,26 @@ export default function App() {
   }
 
   return <main className={`hero ${immersive ? 'is-immersive' : ''}`} id="hero" ref={root} data-mode={preferences.mode}>
-    <div className="landscape" aria-hidden="true">
-      <div className="landscape-plane">
-        <picture className="landscape-layer daylight-image"><source media="(max-aspect-ratio: 3/4)" srcSet={`${ART}daylight-portrait.webp`} /><img className="landscape-image" src={`${ART}daylight.webp`} alt="" fetchPriority="high" onError={() => setArtError(true)} /></picture>
-        <picture className="landscape-layer dusk-image"><source media="(max-aspect-ratio: 3/4)" srcSet={`${ART}dusk-portrait.webp`} /><img className="landscape-image" src={`${ART}dusk.webp`} alt="" onError={() => setArtError(true)} /></picture>
-      </div>
-      <div className="haze haze-back" /><div className="haze haze-front" />
-      <canvas ref={canvas} className="living-canvas" />
-      <div className="scene-shade" />
-    </div>
-    <p className="sr-only">An original Japanese autumn landscape: a seated samurai beneath a crimson maple on a grassy hillside, with Mount Fuji and hazy mountain layers in the distance.</p>
+    <MountainScene canvasRef={canvas} onError={() => setArtError(true)} />
+    <p className="sr-only">A warm mountain landscape with a golden peak, a timber chalet and a green meadow, framed by large pink and crimson trees. Leaves drift with the breeze and foreground grass responds to the pointer.</p>
     <div className="interface" aria-hidden={immersive} inert={immersive}>
       <a className="skip-link" href="#moment">Skip to the moment</a>
       <header className="masthead">
-        <a className="wordmark" href="#hero" aria-label="Aki home"><span className="brand-seal" aria-hidden="true">秋</span><span>AKI<span className="brand-subtitle">A MOMENT APART</span></span></a>
-        <span className="masthead-note"><span /> An autumn interlude</span>
+        <a className="wordmark" href="#hero" aria-label="Skardu Spring home"><span className="brand-seal" aria-hidden="true"><BrandMark /></span><span>Skardu Spring<span className="brand-subtitle">PURE MOUNTAIN WATER</span></span></a>
+        <span className="masthead-note"><span /> A place above the ordinary</span>
         <button className="top-scenery underlined" onClick={() => setImmersive(true)}>Scenery view <Icon name="expand" size={16}/></button>
       </header>
       <section className="hero-copy" id="moment" tabIndex={-1} aria-labelledby="hero-title">
-        <p className="eyebrow reveal"><span className="eyebrow-rule" /> STILLNESS, IN SEASON</p>
-        <h1 id="hero-title" className="reveal">Let the world<br /><em>fall quiet.</em></h1>
-        <p className="supporting-copy reveal">A quiet hillside. A passing breeze.<br />Nothing to chase. Just a moment to be.</p>
+        <p className="eyebrow reveal"><span className="eyebrow-rule" /> A PLACE ABOVE THE ORDINARY</p>
+        <h1 id="hero-title" className="reveal">Some places<br /><em>stay with you.</em></h1>
+        <p className="supporting-copy reveal">Beyond the city, the Karakoram opens into a world of stone, snow and quiet. This is the landscape that inspires Skardu Spring.</p>
         <div className="hero-actions reveal">
           <button ref={enterButton} className="button-primary magnetic" onClick={() => setImmersive(true)}>Enter the scenery <Icon name="arrow" size={19}/></button>
           <button className="button-text magnetic underlined" onClick={openSettings}>Set the mood <Icon name="sliders" size={17}/></button>
         </div>
-        <span className="copy-footnote reveal">BREATHE IN. LET GO.</span>
       </section>
       <footer className="scene-footer">
-        <div className="scene-coordinate"><span className="tiny-maple"><Icon name="leaf" size={24}/></span><span>THE ART OF DOING LESS<span className="footer-subline">An original living landscape</span></span></div>
+        <div className="scene-coordinate"><span className="tiny-maple"><Icon name="leaf" size={24}/></span><span>FOLLOW THE MOUNTAIN BREEZE<span className="footer-subline">Move across the grass</span></span></div>
         <div className="scene-controls" role="group" aria-label="Scene controls">
           <button className="control wind-control" onClick={openSettings} aria-label="Adjust wind strength"><Icon name="wind" size={19}/><span>{windName}</span></button>
           <span className="control-divider" />
@@ -109,7 +101,7 @@ export default function App() {
         <h2 id="mood-title">A change in<br /><em>the atmosphere.</em></h2>
         <label className="wind-label" htmlFor="wind-strength"><span>Wind strength</span><output htmlFor="wind-strength">{Math.round(preferences.wind * 100)}%</output></label>
         <input id="wind-strength" type="range" min="0" max="100" step="1" value={Math.round(preferences.wind * 100)} onChange={event => update({ wind: Number(event.target.value) / 100 })}/>
-        <div className="range-ends"><span>Calm</span><span>Autumn gusts</span></div>
+        <div className="range-ends"><span>Calm</span><span>Mountain gusts</span></div>
         <fieldset className="time-settings"><legend>Time of day</legend><div>{['daylight', 'dusk'].map(mode => <button key={mode} className={preferences.mode === mode ? 'selected' : ''} aria-pressed={preferences.mode === mode} onClick={() => update({ mode })}><Icon name={mode === 'daylight' ? 'sun' : 'moon'} size={19}/>{mode === 'daylight' ? 'Daylight' : 'Dusk'}</button>)}</div></fieldset>
         <button className="dialog-motion" aria-label={paused ? 'Resume scene motion' : 'Pause scene motion'} onClick={() => setPaused(value => !value)}><span><Icon name={paused ? 'play' : 'pause'}/>{paused ? 'Resume the moment' : 'Pause the moment'}</span><span>{paused ? 'Paused' : 'Playing'}</span></button>
         <p className="settings-note">The leaves, grass and mountain haze follow your pace. Wind and daylight are remembered in this browser.{reduced ? ' Your device prefers reduced motion; animation starts paused.' : ''}</p>

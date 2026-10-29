@@ -1,43 +1,48 @@
-# AKI — A moment apart
+# Skardu Spring — Mountain hero
 
-A single cinematic Japanese autumn hero built with React and Vite. Original generated artwork shows a seated samurai beneath a crimson maple, Mount Fuji, atmospheric mountain layers and a grassy hillside. Typography and every control are real HTML.
+This branch contains only the new mountain hero from Skardu Spring, adapted into an independent React/Vite demo. It does not import the Skardu repository, Next.js, the storefront, shopping APIs, cart, scroll chapters, environment secrets or files elsewhere on the computer. SlowPlay's main branch retains its existing AKI hero.
 
-Run `npm ci` and `npm run dev`. The deployment base is `/SlowPlay/` for [GitHub Pages](https://waqar-743.github.io/SlowPlay/).
+## Run
+
+Requires Node.js 20.19+ or 22.12+.
+
+```sh
+npm ci
+npm run dev -- --host 127.0.0.1 --port 5175
+```
+
+Open the printed URL with `/SlowPlay/` at the end. The existing deployment base is preserved in vite.config.js; all images, SVGs and fonts work beneath that prefix.
+
+```sh
+npm run build
+npm run preview -- --host 127.0.0.1 --port 4173
+```
+
+## Included hero
+
+- The centered “Some places stay with you” headline and mountain-inspired supporting text.
+- The redesigned golden mountain, timber chalet and green meadow, framed by large pink and crimson trees.
+- A clean landscape background and a separate transparent tree layer, so swaying foliage does not shift the mountains or sky.
+- SVG wind trails and rose-coloured leaves drifting in the same direction.
+- Grass aligned to the sloping meadow, bending locally near the pointer and settling back into the breeze.
+- Self-hosted Cormorant and Manrope fonts with their license notices.
+
+src/MountainScene.jsx owns the visual layers, src/motion.js owns the animation loop, and src/App.jsx contains the real HTML interface. All runtime mountain art is in public/hero/. The original generated composite and generation prompts are included there as well. Unused artwork inherited from SlowPlay's main branch remains untouched.
 
 ## Controls
 
-- **Enter the scenery / Scenery view:** hides the interface. **Exit scenery** or **Escape** returns, restoring keyboard focus.
-- **Set the mood / wind control:** opens the native settings dialog. Adjust wind from calm to gusts, select daylight or dusk, and pause or resume.
-- **Daylight / Dusk:** switches the complete painted lighting environment, with matching leaf and grass shading.
-- **Pause / Resume:** freezes or resumes leaves, grass, haze and pointer parallax.
-- Move a mouse nearby to brush leaves aside. Buttons have magnetic hover, underline and press feedback.
-- Tab, Shift+Tab, Enter, Space and the range input's arrow/Home/End keys work with native controls.
+Enter the scenery or Scenery view hides the interface; Exit scenery or Escape restores it and keyboard focus. Set the mood opens wind, lighting and pause controls. Daylight and dusk use the same landscape with a continuous lighting tint. Preferences are saved only in this browser, under a separate mountain-hero storage key.
 
-Wind and time of day are saved locally. No accounts, remote APIs, audio, analytics or additional pages are included.
-
-## Motion and performance
-
-`src/motion.js` owns one imperative animation loop, outside React render cycles. Individual leaves have distinct depth, size, drift, rotation and flutter. Foreground grass and two haze layers move independently. Mouse parallax is smoothed; nearby leaves react to the pointer.
-
-Desktop uses 52 leaves and 240 grass blades at up to 60 frames/second, with canvas pixel ratio capped at 1.6. Narrow/coarse-pointer layouts use 25 leaves, 110 blades, a 30-frame limit and ratio capped at 1.25. Portrait artwork is selected by aspect ratio rather than cropping the samurai from the wide scene.
-
-Reduced-motion preferences start the scene paused and remove text/hover transitions and parallax. Explicit Play can enable ambient motion for the visit. Hidden documents cancel rendering and resume with a fresh time step. ResizeObserver preserves scene sizing, and cleanup cancels animation, observers and event listeners.
-
-## Artwork and fonts
-
-The four paintings and one transparent maple leaf were generated with the built-in image-generation tool, reviewed, then optimized to WebP. The wide and portrait daylight scenes each have a matching dusk companion. All runtime artwork is under `public/art/`; [generation prompts](public/art/GENERATION.md) describe the complete prompt set. The code and paintings are original; the [reference video](https://x.com/sucodeee/status/2111851097551782252) informed composition and mood.
-
-Cormorant Garamond and DM Sans are self-hosted in `public/fonts/`, with their SIL Open Font License notices. Interface icons and the fallback leaf silhouettes are custom vector artwork; generated leaf sprites are cached once for efficient rendering.
+Reduced-motion preferences start paused. Explicit Play enables canvas animation for the visit. Hidden documents stop rendering. Pointer movement never updates React state. ResizeObserver, event listeners and animation frames are cleaned up on unmount.
 
 ## Verify
 
 ```sh
 npm run lint
 npm run build
-npx playwright install chromium
 npm run test:e2e
 ```
 
-Local browser checks default to installed Google Chrome; CI uses bundled Chromium. `HERO_QA_URL` can target a published URL, and `HERO_QA_DIR` selects the evidence directory. Tests check assets, HTML controls, actual canvas motion, pointer interaction, wind/daylight/pause, focus and immersive exit, six layouts, reduced motion and simulated document visibility.
+Local browser checks use installed Google Chrome. CI uses Chromium (`npx playwright install --with-deps chromium`). Checks cover six screen sizes, centered text, assets, canvas motion, grass hover, wind, lighting, pause, preferences, keyboard/focus behavior, touch controls and reduced motion.
 
-The previous arcade source and assets have been removed from this project. Earlier versions remain recoverable through Git history.
+The original Skardu project is restored to its previous hero independently; neither project needs the other checkout to build or run.

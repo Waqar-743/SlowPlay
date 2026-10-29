@@ -4,8 +4,8 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
 const target = process.env.HERO_QA_URL || './'
-const output = process.env.HERO_QA_DIR || fileURLToPath(new URL('../../../outputs/aki/', import.meta.url))
-const state = page => page.evaluate(() => window.__akiScene?.getState())
+const output = process.env.HERO_QA_DIR || fileURLToPath(new URL('../test-results/hero/', import.meta.url))
+const state = page => page.evaluate(() => window.__mountainScene?.getState())
 const errors = new WeakMap()
 const views = [
   ['desktop',1440,900], ['tablet',768,1024], ['phone-portrait',390,844],
@@ -21,13 +21,13 @@ test.afterEach(async ({ page }) => { expect(errors.get(page)).toEqual([]) })
 async function ready(page) {
   await page.goto(target)
   await page.evaluate(() => document.fonts.ready)
-  await expect.poll(() => page.evaluate(() => Boolean(window.__akiScene))).toBe(true)
+  await expect.poll(() => page.evaluate(() => Boolean(window.__mountainScene))).toBe(true)
   await expect.poll(async () => (await state(page)).leafArtReady).toBe(true)
   await page.locator('.landscape-image').evaluateAll(images => Promise.all(images.map(image => image.decode())))
 }
 async function capture(page, name) {
   await mkdir(output, { recursive:true })
-  await page.screenshot({ path:path.join(output, `aki-${name}.png`), fullPage:true, scale:'css' })
+  await page.screenshot({ path:path.join(output, `mountain-${name}.png`), fullPage:true, scale:'css' })
 }
 async function expectFits(page, names) {
   const size = page.viewportSize()
@@ -51,7 +51,7 @@ async function expectFits(page, names) {
 
 test('real HTML, generated artwork, settings, day/dusk, pause and persisted preferences work', async ({page}) => {
   await ready(page)
-  await expect(page.getByRole('heading', {level:1})).toHaveText(/Let the world.*fall quiet/)
+  await expect(page.getByRole('heading', {level:1})).toHaveText(/Some places.*stay with you/)
   expect(await page.locator('canvas').count()).toBe(1)
   expect(await page.evaluate(() => document.fonts.check('20px Cormorant') && document.fonts.check('12px DM'))).toBe(true)
   await capture(page,'daylight-desktop')
@@ -98,6 +98,9 @@ test('individual leaves, foreground grass, haze, wind, parallax and nearby inter
   const leaf = after.leaves.find(item=>item.x>720 && item.y>100 && item.y<650) || after.leaves[0]
   await page.mouse.move(leaf.x,leaf.y)
   await expect.poll(async()=> (await state(page)).interactions).toBeGreaterThan(after.interactions)
+  const probe = (await state(page)).grassProbe
+  await page.mouse.move(probe.x,probe.y-probe.height*.5)
+  await expect.poll(async()=>Math.abs((await state(page)).grassProbe.bend-probe.bend)).toBeGreaterThan(5)
   await page.mouse.move(1280,180)
   await expect.poll(async()=> Math.abs((await state(page)).parallax.x)).toBeGreaterThan(.15)
   await page.getByRole('button',{name:'Adjust wind strength',exact:true}).click()
@@ -150,8 +153,10 @@ test('desktop, tablet and phone layouts preserve controls, artwork and resolutio
     const snapshot=await state(page)
     expect(snapshot.leafCount).toBe(width<768 ? 25 : 52)
     expect(snapshot.ratio).toBeLessThanOrEqual(width<768 ? 1.25 : 1.6)
-    const source=await page.locator('.daylight-image img').evaluate(image=>image.currentSrc)
-    expect(source.includes('portrait')).toBe(width/height<=.75)
+    const titleBox=await page.getByRole('heading',{level:1}).boundingBox()
+    expect(Math.abs(titleBox.x+titleBox.width/2-width/2)).toBeLessThan(2)
+    const source=await page.locator('.landscape-image').first().evaluate(image=>image.currentSrc)
+    expect(source).toContain('hero/rose-landscape.webp')
     await capture(page,`daylight-${name}`)
     await page.getByRole('button',{name:'Switch to dusk',exact:true}).click()
     await expect.poll(async()=> (await state(page)).dusk).toBe(1)

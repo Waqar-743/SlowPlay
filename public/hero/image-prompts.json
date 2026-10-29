@@ -1,0 +1,13 @@
+{
+  "tool": "Built-in image generation",
+  "reference": "User-provided mountain, meadow and chalet photograph",
+  "original": "rose-mountain-original.png",
+  "websiteAsset": "rose-mountain.webp",
+  "animatedLayers": {
+    "background": "rose-landscape.webp",
+    "trees": "rose-trees.webp",
+    "backgroundPrompt": "Remove only the two enormous foreground trees, including their overhanging branches and trunks. Fill their areas seamlessly with matching blue sky, distant mountains and meadow. Preserve the golden mountain massif, green valley, sloping meadow, chalets and smaller pink midground trees. Keep the same composition, perspective, natural colours and warm light. No new objects or text.",
+    "treePrompt": "Extract only the two large foreground red/pink edge trees, preserving their original positions, scale, photographic leaf detail and warm lighting. Remove all sky, mountains, valley, cabins, meadow, grass and small midground trees. Make the background genuinely transparent and preserve open central space."
+  },
+  "prompt": "Edit the attached landscape photograph into a premium photorealistic website hero background. Preserve the distinctive warm sunlit jagged mountain massif, distant green valley, sloping lush green and gold alpine meadow and small rustic timber chalet. Expand the composition into a very wide 16:9 landscape with generous uninterrupted open central mountain and meadow space for centered website typography (do not render typography). Make the deciduous trees much larger and more prominent than in the reference and recolor their foliage to beautiful natural rose pink, dusty coral and deep crimson red. Frame the scene with a large mature pink-red leafy tree on the far left and another on the far right, their trunks rising from the meadow and crowns extending inward at the upper edges; keep the middle 55 percent open and uncluttered. Include realistic smaller rose-pink trees in the midground. Warm clear morning sunlight illuminates the mountain rock, pink leaves and emerald meadow; pale clear sky with a few delicate clouds. Some tall fine grass along the bottom edge. Maintain a natural photographic appearance with detailed irregular individual leaves and blades, convincing light and shadows, realistic mountain rock texture, calm atmospheric depth. Vivid natural color, restrained highlights, no oversaturation, no cartoon or illustrated look, no people, no water bottle, no text, logos, captions, frame or watermark. This is a single seamless landscape photograph, not a website mockup or collage. High quality landscape photograph wide enough for a full-width desktop hero."
+}
