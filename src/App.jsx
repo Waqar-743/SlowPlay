@@ -200,7 +200,7 @@ export default function App() {
         <div className="header-actions"><button className="mobile-menu icon-button" aria-label="Open navigation" onClick={event => openModal('menu', event)}><Icon name="menu" size={21}/></button><button className="get-app" onClick={event => openModal('app', event)}>Get the app</button></div>
       </header>
       <h1 className="grotto-title reveal">Sink into <em>deep</em> focus.</h1>
-      <p className="grotto-subtitle reveal">Nature-inspired soundscapes, tuned to quiet your mind and make room for focus. Hit play, start the timer, disappear.</p>
+      <p className="grotto-subtitle reveal"><span className="subtitle-full">Nature-inspired soundscapes, tuned to quiet your mind and make room for focus. Hit play, start the timer, disappear.</span><span className="subtitle-compact">Hit play. Find your focus.</span></p>
       <div className="focus-dock reveal">
         <section className="focus-player" id="focus-player" aria-label="Focus player" tabIndex={-1}>
           <div className="player-top">

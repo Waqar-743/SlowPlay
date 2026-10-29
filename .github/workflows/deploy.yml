@@ -61,6 +61,16 @@ jobs:
           name: grotto-hero-preview
           path: dist/
 
+      - name: Save verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hero-verification
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+
 
       - name: Setup Pages
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

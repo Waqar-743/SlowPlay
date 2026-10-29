@@ -12,6 +12,7 @@ const failures = new WeakMap()
 const views = [
   ['desktop',1440,900], ['tablet',768,1024], ['phone-portrait',390,844],
   ['phone-landscape',844,390], ['compact-portrait',320,568], ['compact-landscape',568,320],
+  ['narrow-panel',280,500], ['short-portrait',320,480],
 ]
 const scenes = [['Hidden waterfall','waterfall'],['Rain on leaves','rain'],['Night ocean','ocean'],['Cave drips','cave']]
 const button = (page,name) => page.getByRole('button',{name,exact:true})
@@ -82,12 +83,20 @@ async function ready(page) {
   await expect.poll(async()=>(await motion(page)).ready).toBe(true)
   expect((await motion(page)).webgl).toBe(true)
   expect((await motion(page)).error).toBe('')
+  await settled(page)
+}
+async function settled(page) {
+  await page.locator('.focus-dock').evaluate(async element=>{
+    await Promise.all(element.getAnimations().map(animation=>animation.finished.catch(()=>{})))
+    return true
+  })
 }
 async function capture(page,name) {
   await mkdir(output,{recursive:true})
   await page.screenshot({path:path.join(output,'grotto-'+name+'.png'),fullPage:true,scale:'css',animations:'disabled'})
 }
 async function fits(page,names) {
+  await settled(page)
   const viewport=page.viewportSize(),boxes=[]
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true)
   for(const name of names){
@@ -233,7 +242,7 @@ test('settings are keyboard operable and immersive exit restores focus',async({p
   await expect(enter).toBeFocused()
 })
 
-test('six desktop, tablet and phone viewports keep controls readable and reachable',async({page})=>{
+test('eight desktop, tablet and phone viewports keep controls readable and reachable',async({page})=>{
   test.setTimeout(120000)
   await ready(page)
   const measurements=[]

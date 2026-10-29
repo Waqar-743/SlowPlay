@@ -3,7 +3,8 @@ import { defineConfig } from '@playwright/test'
 export default defineConfig({
   testDir: './tests',
   workers: 1,
-  timeout: 30_000,
+  // The shared CI runner needs more time for complete interaction sequences.
+  timeout: process.env.CI ? 90_000 : 30_000,
   expect: { timeout: 8_000 },
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
