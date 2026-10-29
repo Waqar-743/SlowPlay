@@ -5,7 +5,8 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist', 'test-results', 'playwright-report']),
+  // The independent 3D viewer has its own package and validation commands.
+  globalIgnores(['dist', 'test-results', 'playwright-report', 'kharpocho-explorer/**']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [

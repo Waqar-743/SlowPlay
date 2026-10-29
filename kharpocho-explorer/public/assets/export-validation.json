@@ -1,0 +1,687 @@
+{
+  "checked": "2026-10-29T16:01:22.010Z",
+  "decoder": "glTF Transform NodeIO + MeshoptDecoder",
+  "files": [
+    {
+      "file": "kharpocho-complete.glb",
+      "bytes": 24221392,
+      "nodes": 235,
+      "meshes": 62,
+      "checkedAccessors": 266,
+      "uniqueReferencedVertices": 171849,
+      "uniqueTriangles": 328450,
+      "renderedTriangles": 1576494,
+      "geometryDraws": 45164,
+      "gpuInstances": 44958,
+      "roots": [
+        "mountain",
+        "fort",
+        "Skardu valley · interpretive context"
+      ],
+      "bounds": {
+        "min": [
+          -14050,
+          -8.113491314354746,
+          -14050
+        ],
+        "max": [
+          14050,
+          1817.6532862362296,
+          14050
+        ]
+      },
+      "componentBounds": {
+        "mountain": {
+          "min": [
+            -1082.56591796875,
+            -4.636111913450313,
+            -295.3495775655754
+          ],
+          "max": [
+            707.2947387695312,
+            340.6640846707551,
+            312.67577947032584
+          ]
+        },
+        "fort": {
+          "min": [
+            432.1618139632218,
+            151.16536019772477,
+            -33.718438130983195
+          ],
+          "max": [
+            565.7855666746905,
+            164.689999692142,
+            42.32117315488867
+          ]
+        },
+        "Skardu valley · interpretive context": {
+          "min": [
+            -14050,
+            -8.113491314354746,
+            -14050
+          ],
+          "max": [
+            14050,
+            1817.6532862362296,
+            14050
+          ]
+        }
+      },
+      "extensions": [
+        "EXT_mesh_gpu_instancing",
+        "EXT_meshopt_compression",
+        "KHR_mesh_quantization"
+      ],
+      "embeddedImages": 17,
+      "images": [
+        {
+          "name": "rock-color",
+          "mimeType": "image/jpeg",
+          "bytes": 1262632
+        },
+        {
+          "name": "rock-normal",
+          "mimeType": "image/jpeg",
+          "bytes": 1678354
+        },
+        {
+          "name": "rock-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 206893
+        },
+        {
+          "name": "rock-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 605359
+        },
+        {
+          "name": "sand-color",
+          "mimeType": "image/jpeg",
+          "bytes": 762468
+        },
+        {
+          "name": "sand-normal",
+          "mimeType": "image/png",
+          "bytes": 2400144
+        },
+        {
+          "name": "sand-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 111361
+        },
+        {
+          "name": "sand-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 126410
+        },
+        {
+          "name": "stone-color",
+          "mimeType": "image/jpeg",
+          "bytes": 1431857
+        },
+        {
+          "name": "plaster-color",
+          "mimeType": "image/jpeg",
+          "bytes": 766832
+        },
+        {
+          "name": "plaster-normal",
+          "mimeType": "image/png",
+          "bytes": 3800767
+        },
+        {
+          "name": "plaster-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 124524
+        },
+        {
+          "name": "plaster-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 157738
+        },
+        {
+          "name": "timber-color",
+          "mimeType": "image/jpeg",
+          "bytes": 887654
+        },
+        {
+          "name": "timber-normal",
+          "mimeType": "image/png",
+          "bytes": 3515535
+        },
+        {
+          "name": "timber-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 208790
+        },
+        {
+          "name": "timber-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 358252
+        }
+      ],
+      "externalDependencies": 0,
+      "passed": true
+    },
+    {
+      "file": "kharpocho-fort.glb",
+      "bytes": 16768224,
+      "nodes": 158,
+      "meshes": 44,
+      "checkedAccessors": 171,
+      "uniqueReferencedVertices": 8288,
+      "uniqueTriangles": 10796,
+      "renderedTriangles": 678964,
+      "geometryDraws": 29538,
+      "gpuInstances": 29398,
+      "roots": [
+        "fort"
+      ],
+      "bounds": {
+        "min": [
+          432.1618139632218,
+          151.16536019772477,
+          -33.718438130983195
+        ],
+        "max": [
+          565.7855666746905,
+          164.689999692142,
+          42.32117315488867
+        ]
+      },
+      "componentBounds": {
+        "fort": {
+          "min": [
+            432.1618139632218,
+            151.16536019772477,
+            -33.718438130983195
+          ],
+          "max": [
+            565.7855666746905,
+            164.689999692142,
+            42.32117315488867
+          ]
+        }
+      },
+      "extensions": [
+        "EXT_mesh_gpu_instancing",
+        "EXT_meshopt_compression",
+        "KHR_mesh_quantization"
+      ],
+      "embeddedImages": 13,
+      "images": [
+        {
+          "name": "rock-color",
+          "mimeType": "image/jpeg",
+          "bytes": 1262632
+        },
+        {
+          "name": "rock-normal",
+          "mimeType": "image/jpeg",
+          "bytes": 1678354
+        },
+        {
+          "name": "rock-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 206893
+        },
+        {
+          "name": "rock-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 605359
+        },
+        {
+          "name": "plaster-color",
+          "mimeType": "image/jpeg",
+          "bytes": 766832
+        },
+        {
+          "name": "plaster-normal",
+          "mimeType": "image/png",
+          "bytes": 3800767
+        },
+        {
+          "name": "plaster-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 124524
+        },
+        {
+          "name": "plaster-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 157738
+        },
+        {
+          "name": "timber-color",
+          "mimeType": "image/jpeg",
+          "bytes": 887654
+        },
+        {
+          "name": "timber-normal",
+          "mimeType": "image/png",
+          "bytes": 3515535
+        },
+        {
+          "name": "timber-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 208790
+        },
+        {
+          "name": "timber-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 358252
+        },
+        {
+          "name": "stone-color",
+          "mimeType": "image/jpeg",
+          "bytes": 1431857
+        }
+      ],
+      "externalDependencies": 0,
+      "passed": true
+    },
+    {
+      "file": "khardong-mountain.glb",
+      "bytes": 11757268,
+      "nodes": 64,
+      "meshes": 6,
+      "checkedAccessors": 42,
+      "uniqueReferencedVertices": 110103,
+      "uniqueTriangles": 216410,
+      "renderedTriangles": 734890,
+      "geometryDraws": 13658,
+      "gpuInstances": 13600,
+      "roots": [
+        "mountain"
+      ],
+      "bounds": {
+        "min": [
+          -1082.56591796875,
+          -4.636111913450313,
+          -295.3495775655754
+        ],
+        "max": [
+          707.2947387695312,
+          340.6640846707551,
+          312.67577947032584
+        ]
+      },
+      "componentBounds": {
+        "mountain": {
+          "min": [
+            -1082.56591796875,
+            -4.636111913450313,
+            -295.3495775655754
+          ],
+          "max": [
+            707.2947387695312,
+            340.6640846707551,
+            312.67577947032584
+          ]
+        }
+      },
+      "extensions": [
+        "EXT_mesh_gpu_instancing",
+        "EXT_meshopt_compression",
+        "KHR_mesh_quantization"
+      ],
+      "embeddedImages": 9,
+      "images": [
+        {
+          "name": "rock-color",
+          "mimeType": "image/jpeg",
+          "bytes": 1262632
+        },
+        {
+          "name": "rock-normal",
+          "mimeType": "image/jpeg",
+          "bytes": 1678354
+        },
+        {
+          "name": "rock-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 206893
+        },
+        {
+          "name": "rock-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 605359
+        },
+        {
+          "name": "sand-color",
+          "mimeType": "image/jpeg",
+          "bytes": 762468
+        },
+        {
+          "name": "sand-normal",
+          "mimeType": "image/png",
+          "bytes": 2400144
+        },
+        {
+          "name": "sand-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 111361
+        },
+        {
+          "name": "sand-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 126410
+        },
+        {
+          "name": "stone-color",
+          "mimeType": "image/jpeg",
+          "bytes": 1431857
+        }
+      ],
+      "externalDependencies": 0,
+      "passed": true
+    },
+    {
+      "file": "../Kharpocho-Fort-Editable.glb",
+      "bytes": 23192572,
+      "nodes": 29556,
+      "meshes": 112,
+      "checkedAccessors": 66,
+      "uniqueReferencedVertices": 11288,
+      "uniqueTriangles": 12716,
+      "renderedTriangles": 678964,
+      "geometryDraws": 29538,
+      "gpuInstances": 0,
+      "roots": [
+        "fort"
+      ],
+      "bounds": {
+        "min": [
+          432.1618008436203,
+          151.16536067769675,
+          -33.71843733634055
+        ],
+        "max": [
+          565.7855648890256,
+          164.689999692142,
+          42.3211749566532
+        ]
+      },
+      "componentBounds": {
+        "fort": {
+          "min": [
+            432.1618008436203,
+            151.16536067769675,
+            -33.71843733634055
+          ],
+          "max": [
+            565.7855648890256,
+            164.689999692142,
+            42.3211749566532
+          ]
+        }
+      },
+      "extensions": [],
+      "embeddedImages": 13,
+      "images": [
+        {
+          "name": "rock-color",
+          "mimeType": "image/jpeg",
+          "bytes": 1262632
+        },
+        {
+          "name": "rock-normal",
+          "mimeType": "image/jpeg",
+          "bytes": 1678354
+        },
+        {
+          "name": "rock-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 206893
+        },
+        {
+          "name": "rock-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 605359
+        },
+        {
+          "name": "plaster-color",
+          "mimeType": "image/jpeg",
+          "bytes": 766832
+        },
+        {
+          "name": "plaster-normal",
+          "mimeType": "image/png",
+          "bytes": 3800767
+        },
+        {
+          "name": "plaster-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 124524
+        },
+        {
+          "name": "plaster-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 157738
+        },
+        {
+          "name": "timber-color",
+          "mimeType": "image/jpeg",
+          "bytes": 887654
+        },
+        {
+          "name": "timber-normal",
+          "mimeType": "image/png",
+          "bytes": 3515535
+        },
+        {
+          "name": "timber-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 208790
+        },
+        {
+          "name": "timber-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 358252
+        },
+        {
+          "name": "stone-color",
+          "mimeType": "image/jpeg",
+          "bytes": 1431857
+        }
+      ],
+      "externalDependencies": 0,
+      "passed": true
+    },
+    {
+      "file": "../Kharpocho-Complete-Editable.glb",
+      "bytes": 43502352,
+      "nodes": 45193,
+      "meshes": 136,
+      "checkedAccessors": 117,
+      "uniqueReferencedVertices": 175929,
+      "uniqueTriangles": 330730,
+      "renderedTriangles": 1576494,
+      "geometryDraws": 45164,
+      "gpuInstances": 0,
+      "roots": [
+        "mountain",
+        "fort",
+        "Skardu valley · interpretive context"
+      ],
+      "bounds": {
+        "min": [
+          -14050,
+          -8,
+          -14050
+        ],
+        "max": [
+          14050,
+          1817.539794921875,
+          14050
+        ]
+      },
+      "componentBounds": {
+        "mountain": {
+          "min": [
+            -1082.56591796875,
+            -4.636108825472284,
+            -295.3495682701928
+          ],
+          "max": [
+            707.2947387695312,
+            340.6640868004942,
+            312.6757877344973
+          ]
+        },
+        "fort": {
+          "min": [
+            432.1618008436203,
+            151.16536067769675,
+            -33.71843733634055
+          ],
+          "max": [
+            565.7855648890256,
+            164.689999692142,
+            42.3211749566532
+          ]
+        },
+        "Skardu valley · interpretive context": {
+          "min": [
+            -14050,
+            -8,
+            -14050
+          ],
+          "max": [
+            14050,
+            1817.539794921875,
+            14050
+          ]
+        }
+      },
+      "extensions": [],
+      "embeddedImages": 17,
+      "images": [
+        {
+          "name": "rock-color",
+          "mimeType": "image/jpeg",
+          "bytes": 1262632
+        },
+        {
+          "name": "rock-normal",
+          "mimeType": "image/jpeg",
+          "bytes": 1678354
+        },
+        {
+          "name": "rock-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 206893
+        },
+        {
+          "name": "rock-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 605359
+        },
+        {
+          "name": "sand-color",
+          "mimeType": "image/jpeg",
+          "bytes": 762468
+        },
+        {
+          "name": "sand-normal",
+          "mimeType": "image/png",
+          "bytes": 2400144
+        },
+        {
+          "name": "sand-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 111361
+        },
+        {
+          "name": "sand-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 126410
+        },
+        {
+          "name": "stone-color",
+          "mimeType": "image/jpeg",
+          "bytes": 1431857
+        },
+        {
+          "name": "plaster-color",
+          "mimeType": "image/jpeg",
+          "bytes": 766832
+        },
+        {
+          "name": "plaster-normal",
+          "mimeType": "image/png",
+          "bytes": 3800767
+        },
+        {
+          "name": "plaster-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 124524
+        },
+        {
+          "name": "plaster-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 157738
+        },
+        {
+          "name": "timber-color",
+          "mimeType": "image/jpeg",
+          "bytes": 887654
+        },
+        {
+          "name": "timber-normal",
+          "mimeType": "image/png",
+          "bytes": 3515535
+        },
+        {
+          "name": "timber-roughness",
+          "mimeType": "image/jpeg",
+          "bytes": 208790
+        },
+        {
+          "name": "timber-ao",
+          "mimeType": "image/jpeg",
+          "bytes": 358252
+        }
+      ],
+      "externalDependencies": 0,
+      "passed": true
+    }
+  ],
+  "comparisons": [
+    {
+      "model": "kharpocho-complete",
+      "renderedTriangles": 1576494,
+      "maxBoundsDifferenceMetres": 0.11349131435474646,
+      "toleranceMetres": 0.5,
+      "passed": true
+    },
+    {
+      "model": "kharpocho-fort",
+      "renderedTriangles": 678964,
+      "maxBoundsDifferenceMetres": 0.000013119601476319076,
+      "toleranceMetres": 0.5,
+      "passed": true
+    }
+  ],
+  "collision": {
+    "returnedWorldSpaceWalls": 37,
+    "gateway": {
+      "a": [
+        495,
+        35
+      ],
+      "b": [
+        505,
+        35
+      ],
+      "bottom": 152.4,
+      "top": 162.6,
+      "thickness": 2.8499999999999996,
+      "gate": true
+    },
+    "gateTerrainHeight": 154.65,
+    "mainUsesReturnedMap": true,
+    "passed": true
+  },
+  "passed": true
+}

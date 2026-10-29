@@ -1,0 +1,17 @@
+{
+  "resolution": "2048 × 2048 pixels",
+  "rock_and_stone": {
+    "source": "https://polyhaven.com/a/rock_face",
+    "photography": "Greg Zaal",
+    "processing": "Dario Barresi",
+    "license": "CC0 1.0",
+    "maps": ["color", "OpenGL normal", "roughness", "ambient occlusion", "height"],
+    "modifications": "Color desaturated and brightened into neutral rock and dusty masonry variants. JPEG recompression. These textures are a material analogue, not a scan of Kharpocho."
+  },
+  "sand_plaster_timber": {
+    "source": "Original deterministic procedural material generation for this project",
+    "license": "CC BY 4.0",
+    "maps": ["color", "OpenGL normal", "roughness", "ambient occlusion", "height"]
+  },
+  "geometry_displacement": "The terrain relief is modeled directly into the mesh; the viewer also applies subtle rock/masonry height-map displacement. GLB exports preserve modeled relief, but standard glTF omits shader displacement."
+}

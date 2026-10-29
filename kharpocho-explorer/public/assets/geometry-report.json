@@ -1,0 +1,42 @@
+{
+  "checked": "2026-10-29T16:49:01.529Z",
+  "meshCount": 229,
+  "instancedObjects": 44958,
+  "renderedTrianglesAllLOD": 1615410,
+  "mountainBounds": {
+    "min": [
+      -1125,
+      -5.086017599120405,
+      -322
+    ],
+    "max": [
+      750,
+      340.6640868004942,
+      350
+    ]
+  },
+  "sampledPeak": 338.160590571903,
+  "fortShoulder": 154.55547488200486,
+  "terrain": {
+    "highTriangles": 215272,
+    "lowTriangles": 38916,
+    "instancedRocks": 13600,
+    "rockOutcrops": 2600,
+    "looseDebris": 11000,
+    "pathLength": 1384,
+    "extentMetres": [
+      1875,
+      672
+    ],
+    "maxReliefMetres": 339,
+    "survey": false
+  },
+  "fort": {
+    "stoneCount": 14641,
+    "totalInstances": 29398,
+    "triangles": 665000,
+    "bastions": 7,
+    "interpretation": "Documented construction, inferred plan"
+  },
+  "validation": "Finite geometry and indices, complete mountain extents, shoulder siting, and landmark inspection passed."
+}

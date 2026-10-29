@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#eeeae0" />
+    <meta name="description" content="Explore a researched, three-dimensional interpretation of Kharpocho Fort and the rocky mountain above Skardu, Pakistan. Discover its Balti architecture, landscape and history." />
+    <title>Kharpocho — The Ancient Guardian of Skardu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6" /></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z" /></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6" /></symbol>
+      <symbol id="i-orbit" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="4.8" transform="rotate(-30 12 12)"/><path d="m18 3 1 4-4 1M8 12h.01"/><circle cx="12" cy="12" r="1.5"/></symbol>
+      <symbol id="i-label" viewBox="0 0 24 24"><path d="M4 5h10l7 7-9 9-8-8Z"/><circle cx="8" cy="9" r="1"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+      <symbol id="i-full" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+      <symbol id="i-reset" viewBox="0 0 24 24"><path d="M5 7a8 8 0 1 1-1 8M4 3v5h5"/></symbol>
+      <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 7h5l2-3h4l2 3h5v13H3Z"/><circle cx="12" cy="13" r="4"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></symbol>
+      <symbol id="i-mouse" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="6"/><path d="M12 3v6"/></symbol>
+    </defs></svg>
+
+    <main id="viewer" aria-label="Interactive 3D reconstruction of Kharpocho Fort">
+      <canvas id="scene" aria-label="Three-dimensional mountain and Kharpocho Fort. Drag to orbit 360 degrees, scroll to zoom. Open Controls for free flight and camera perspectives." tabindex="0"></canvas>
+      <div id="labels-layer" aria-live="polite"></div>
+
+      <div class="viewer-hud">
+        <button id="controls-toggle" class="hud-button" type="button" aria-expanded="false" aria-controls="controls-panel">Controls <span aria-hidden="true">≡</span></button>
+        <button id="fullscreen" class="hud-button" type="button" aria-label="Enter fullscreen" title="Fullscreen"><svg><use href="#i-full" /></svg></button>
+      </div>
+      <section id="controls-panel" class="controls-panel" aria-label="Exploration controls" hidden>
+        <div class="panel-heading"><span>Kharpocho · 360°</span><button id="controls-close" type="button" aria-label="Close controls"><svg><use href="#i-close" /></svg></button></div>
+        <div class="navigation-modes" role="group" aria-label="Navigation mode">
+          <button id="orbit-mode" type="button" aria-pressed="true">Orbit</button><button id="flight-mode" type="button" aria-pressed="false">Free flight</button>
+        </div>
+        <p id="navigation-help">Drag to rotate 360°. Scroll or pinch to zoom. Right-drag or use two fingers to pan.</p>
+        <nav class="view-options" aria-label="Camera perspectives">
+          <button class="is-active" data-view="mountain" type="button" aria-pressed="true">Mountain</button><button data-view="fort" type="button" aria-pressed="false">Fortress</button><button data-view="entrance" type="button" aria-pressed="false">Entrance</button><button data-view="river" type="button" aria-pressed="false">Indus</button>
+        </nav>
+        <div class="panel-tools">
+          <button id="orbit-toggle" type="button" aria-pressed="false">Auto rotate</button>
+          <button id="labels-toggle" type="button" aria-pressed="false">Landmarks</button>
+          <button id="light-toggle" type="button">Change light</button>
+          <button id="reset" type="button">Reset view</button>
+          <button id="capture" type="button">Save image</button>
+          <button id="tour-play" type="button">Cinematic tour</button>
+        </div>
+        <label class="quality-label" for="quality">Detail <select id="quality"><option value="high">High</option><option value="low">Adaptive</option></select></label>
+        <div class="panel-links"><button id="notes-open" type="button">Field notes</button><button id="about-open" type="button">Reconstruction &amp; downloads</button></div>
+        <p id="model-stats" class="model-stats">Full 3D landscape</p>
+      </section>
+      <div id="flight-pad" class="flight-pad" aria-label="Free flight movement" hidden>
+        <button data-move="KeyW" type="button" aria-label="Move forward">↑</button><button data-move="KeyQ" type="button" aria-label="Descend">Down</button><button data-move="KeyE" type="button" aria-label="Ascend">Up</button>
+        <button data-move="KeyA" type="button" aria-label="Move left">←</button><button data-move="KeyS" type="button" aria-label="Move backward">↓</button><button data-move="KeyD" type="button" aria-label="Move right">→</button>
+      </div>
+      <p id="interaction-hint" class="interaction-hint">Drag to explore 360° · Scroll to zoom</p>
+      <div id="tour-caption" class="tour-caption" hidden aria-live="polite"></div>
+      <button id="tour-stop" class="tour-stop" type="button" hidden>End tour <svg><use href="#i-close" /></svg></button>
+      <div id="loading" class="loading-screen" role="status"><div class="loading-content"><svg class="loading-mountain" viewBox="0 0 100 60" fill="none" aria-hidden="true"><path d="M3 54 25 21l15 17L58 5l38 49H3Z"/><path d="m58 5-4 29 14-7M25 21l-1 21 10-6M40 38l7 16"/></svg><p class="eyebrow">KHARPOCHO · DIGITAL HERITAGE</p><p class="loading-title">A landscape, remembered.</p><div class="loading-track"><div id="load-progress"></div></div><p id="load-status">Preparing the mountain and its stories…</p></div></div>
+      <div id="error" class="error-state" hidden role="alert"><h2>The landscape could not be opened.</h2><p>This experience requires a browser with WebGL. Try a current browser with hardware acceleration enabled.</p><a href="/assets/kharpocho-complete.glb" download>Download the 3D model <svg><use href="#i-download" /></svg></a></div>
+      <div id="toast" class="toast" role="status" hidden></div>
+    </main>
+
+    <dialog id="notes-dialog" class="research-dialog" aria-labelledby="notes-title">
+      <div class="dialog-top"><a class="dialog-brand" href="#">KHARPOCHO / FIELD NOTES</a><button type="button" data-close aria-label="Close field notes"><svg><use href="#i-close" /></svg></button></div>
+      <div class="dialog-content"><p class="eyebrow">THE LANDSCAPE &amp; THE EVIDENCE</p><h2 id="notes-title">Reading the<br /><em>mountain.</em></h2><p class="dialog-intro">Kharpocho belongs to its rock. Its walls follow the summit’s irregular edge, overlooking the Indus and the settlement of Skardu.</p>
+        <figure class="reference-figure"><img src="/references/aerial.jpg" alt="Aerial photograph of the rocky Kharpocho summit with irregular stone walls and the Indus beyond" loading="lazy" /><figcaption><span>01 — THE SUMMIT, FROM ABOVE</span><a href="https://commons.wikimedia.org/wiki/File:Aerial_view_of_Kharpocho_Fort.jpg" target="_blank" rel="noreferrer">Hannan Balti · CC BY-SA 4.0 ↗</a></figcaption></figure>
+        <div class="research-columns"><div><h3>A fort in two levels</h3><p>Pakistan’s Department of Archaeology and Museums describes upper residential and lower military areas, a water reservoir and the Panjtan mosque. These references guide the arrangement of the summit complex.</p></div><div><h3>Stone, earth and timber</h3><p>Traditional cator-and-cribbage construction binds heavy masonry with timber. The model uses visible timber bands, irregular stone courses and weathered earth finishes to interpret this Balti building tradition.</p></div></div>
+        <figure class="reference-figure portrait-reference"><img src="/references/entrance.jpg" alt="Photograph of Kharpocho Fort’s aged timber entrance and stone masonry" loading="lazy" /><figcaption><span>02 — THE FORTIFIED THRESHOLD</span><a href="https://commons.wikimedia.org/wiki/File:Skardu_Fort_Entrance_2024.jpg" target="_blank" rel="noreferrer">MBurch · CC0 ↗</a></figcaption></figure>
+        <section class="source-list" aria-labelledby="sources-title"><p class="eyebrow" id="sources-title">PRIMARY REFERENCES</p><a href="https://doam.gov.pk/public/sites/7818" target="_blank" rel="noreferrer"><span>01</span><div>Kharpocho Fort<small>Department of Archaeology and Museums, Pakistan · Site 7818</small></div><span>↗</span></a><a href="https://doam.gov.pk/public/sites/8178" target="_blank" rel="noreferrer"><span>02</span><div>Kharpocho Fort, Skardu<small>Department of Archaeology and Museums, Pakistan · Site 8178</small></div><span>↗</span></a><a href="https://s3.amazonaws.com/media.archnet.org/system/publications/contents/4874/original/DPC1587.pdf?1384787082=" target="_blank" rel="noreferrer"><span>03</span><div>Traditional architecture of Baltistan<small>Max Klimburg · Archnet archive</small></div><span>↗</span></a></section>
+        <p class="uncertainty-note">A note on certainty: photographs and written records establish the architectural character and landscape relationship. The terrain, dimensions, circulation and vanished fabric are interpretations. This reconstruction uses no surveyed elevation model, laser scan or photogrammetry.</p>
+      </div>
+    </dialog>
+
+    <dialog id="about-dialog" class="research-dialog" aria-labelledby="about-title">
+      <div class="dialog-top"><span class="dialog-brand">KHARPOCHO / THE RECONSTRUCTION</span><button type="button" data-close aria-label="Close reconstruction information"><svg><use href="#i-close" /></svg></button></div>
+      <div class="dialog-content"><p class="eyebrow">A PLACE, CAREFULLY INTERPRETED</p><h2 id="about-title">Between evidence<br />and <em>imagination.</em></h2><p class="dialog-intro">A navigable study of Kharpocho Fort and its complete mountain, made to invite a closer look at Skardu’s remarkable heritage.</p>
+        <div class="method-row"><span>01</span><div><h3>Start with the landscape</h3><p>The entire isolated rocky mass is modelled in three dimensions, from the foot of its slopes to the summit. Ridges, fractured cliffs, scree and the climbing path give the stronghold its setting.</p></div></div>
+        <div class="method-row"><span>02</span><div><h3>Follow the surviving evidence</h3><p>Published descriptions and photographs inform the stone-and-timber construction, fortified entrance, irregular enclosing walls and mosque. The structure sits within the summit rock rather than on an invented platform.</p></div></div>
+        <div class="method-row"><span>03</span><div><h3>Make uncertainty visible</h3><p>This is a historically informed interpretation, not a measured reconstruction or a claim about the fort at one exact date. Building dimensions, lost interiors, detailed terrain and some ruin arrangements are inferred.</p></div></div>
+        <div class="method-row"><span>04</span><div><h3>Keep the landscape explorable</h3><p>The scene uses reusable geometry, material textures and instanced masonry. Four camera studies, free orbit and a guided journey reveal different relationships between architecture, mountain and river.</p></div></div>
+        <div class="download-section"><p class="eyebrow">CONTINUE THE EXPLORATION</p><a class="download-row" href="/assets/kharpocho-complete.glb" download><span>Complete 3D scene<small>GLB · reusable model and materials</small></span><svg><use href="#i-download" /></svg></a><a class="download-row" href="/downloads/project.zip" download><span>Project &amp; research files<small>Source, references and reconstruction notes</small></span><svg><use href="#i-download" /></svg></a></div>
+        <section class="rendered-studies"><p class="eyebrow">FOUR STUDIES OF THE MODEL</p><div class="render-grid"><a href="/presentation/01-complete-mountain.png" target="_blank"><img loading="lazy" src="/presentation/01-complete-mountain.png" alt="Three-dimensional reconstruction of the complete Khardong mountain"/><span>01 · The complete mountain</span></a><a href="/presentation/02-fort-and-ridge.png" target="_blank"><img loading="lazy" src="/presentation/02-fort-and-ridge.png" alt="Rendered study of the irregular fort and its higher ridge"/><span>02 · The eastern stronghold</span></a><a href="/presentation/03-timber-gateway.png" target="_blank"><img loading="lazy" src="/presentation/03-timber-gateway.png" alt="Rendered study of the timber gateway"/><span>03 · The timber threshold</span></a><a href="/presentation/04-indus-face.png" target="_blank"><img loading="lazy" src="/presentation/04-indus-face.png" alt="Rendered river-facing view of the mountain and fort"/><span>04 · Above the Indus</span></a></div><p class="uncertainty-note">Offline renders of the same 3D geometry. Lighting differs from the interactive viewer.</p></section>
+        <section class="source-list" aria-label="Material credits"><p class="eyebrow">MATERIAL CREDITS</p><a href="https://polyhaven.com/a/rock_face" target="_blank" rel="noreferrer"><span>01</span><div>Rock Face · Poly Haven<small>Dario Barresi, processing · Greg Zaal, photography · 2K PBR maps</small></div><span>↗</span></a><p class="uncertainty-note">Rock and stone maps use this <a href="https://polyhaven.com/license" target="_blank" rel="noreferrer">CC0 material</a>, with colour desaturated and brightened. They were not scanned at Kharpocho. Other material maps are original procedural studies.</p></section>
+        <p class="uncertainty-note">Digital interpretation complements the real place. It does not replace conservation records, archaeological study or the experience of standing on the mountain.</p>
+      </div>
+    </dialog>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -41,3 +41,15 @@ npm run test:e2e
 Local browser checks default to installed Google Chrome; CI uses bundled Chromium. `HERO_QA_URL` can target a published URL, and `HERO_QA_DIR` selects the evidence directory. Tests check assets, HTML controls, actual canvas motion, pointer interaction, wind/daylight/pause, focus and immersive exit, six layouts, reduced motion and simulated document visibility.
 
 The previous arcade source and assets have been removed from this project. Earlier versions remain recoverable through Git history.
+
+## Kharpocho Fort · immersive 3D viewer
+
+The separate [`kharpocho-explorer`](kharpocho-explorer/) project contains the full mountain, fort, valley, PBR textures, reusable GLB assets and research notes. It opens directly into a full-screen 360-degree landscape with orbit and free-flight controls.
+
+```sh
+cd kharpocho-explorer
+npm ci
+npm run dev
+```
+
+Run `npm run check:viewer`, `npm run check`, and `npm run build` inside that folder. This project has its own Vite build; the existing autumn scene and its deployment remain in the repository root. The reconstruction is historically informed and contains inferred terrain and architectural details.

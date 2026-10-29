@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "coordinateSystem": "Y up; X east; Z south. Meters are approximate, not survey dimensions.",
+  "fortOrigin": [
+    500,
+    155,
+    0
+  ],
+  "license": "CC BY 4.0",
+  "exports": [
+    {
+      "file": "kharpocho-complete.glb",
+      "bytes": 24221392,
+      "localOnly": false
+    },
+    {
+      "file": "kharpocho-fort.glb",
+      "bytes": 16768224,
+      "localOnly": false
+    },
+    {
+      "file": "khardong-mountain.glb",
+      "bytes": 11757268,
+      "localOnly": false
+    },
+    {
+      "file": "../Kharpocho-Fort-Editable.glb",
+      "bytes": 23192572,
+      "localOnly": true
+    },
+    {
+      "file": "../Kharpocho-Complete-Editable.glb",
+      "bytes": 43502352,
+      "localOnly": true
+    }
+  ]
+}

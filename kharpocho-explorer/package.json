@@ -1,0 +1,16 @@
+{
+  "name": "kharpocho-ancient-guardian",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "assets": "node tools/export-assets.mjs",
+    "check": "node tools/check-model.mjs",
+    "check:viewer": "node --test tools/check-viewer.test.mjs"
+  },
+  "dependencies": { "three": "0.180.0" },
+  "devDependencies": { "vite": "7.3.7", "@gltf-transform/core": "4.2.1", "@gltf-transform/extensions": "4.2.1", "@gltf-transform/functions": "4.2.1", "meshoptimizer": "0.24.0" }
+}
