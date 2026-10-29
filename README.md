@@ -1,43 +1,42 @@
-# AKI — A moment apart
+# Cenote — Grotto hero
 
-A single cinematic Japanese autumn hero built with React and Vite. Original generated artwork shows a seated samurai beneath a crimson maple, Mount Fuji, atmospheric mountain layers and a grassy hillside. Typography and every control are real HTML.
+A responsive, single-screen focus experience on branch `codex/grotto-hero`. It closely recreates the composition, typography, cavern background and flowing-water motion of [DVK Lab’s Grotto reference](https://dvklab.vercel.app/templates/grotto/). The existing AKI experience remains on `main`.
 
-Run `npm ci` and `npm run dev`. The deployment base is `/SlowPlay/` for [GitHub Pages](https://waqar-743.github.io/SlowPlay/).
+## Run
 
-## Controls
+```sh
+npm ci
+npm run dev
+```
 
-- **Enter the scenery / Scenery view:** hides the interface. **Exit scenery** or **Escape** returns, restoring keyboard focus.
-- **Set the mood / wind control:** opens the native settings dialog. Adjust wind from calm to gusts, select daylight or dusk, and pause or resume.
-- **Daylight / Dusk:** switches the complete painted lighting environment, with matching leaf and grass shading.
-- **Pause / Resume:** freezes or resumes leaves, grass, haze and pointer parallax.
-- Move a mouse nearby to brush leaves aside. Buttons have magnetic hover, underline and press feedback.
-- Tab, Shift+Tab, Enter, Space and the range input's arrow/Home/End keys work with native controls.
+The Vite base is `/SlowPlay/`. For the production preview, run `npm run build` then `npm run preview` and open the `/SlowPlay/` path.
 
-Wind and time of day are saved locally. No accounts, remote APIs, audio, analytics or additional pages are included.
+## Experience
 
-## Motion and performance
+- Depth-based pointer parallax and a slow camera push; flowing waterfall strands, pool ripples, light shafts, rising mist and subtle film grain.
+- A real focus timer with start, pause, resume, duration selection and reset.
+- Four locally synthesized ambiences: Hidden waterfall, Rain on leaves, Night ocean and Cave drips. Audio begins only after a user action; volume and mute are available. These are procedural soundscapes, not field recordings.
+- Keyboard-accessible dialogs, visible focus, reduced-motion support, motion pause and an immersive scenery view with a visible exit and Escape support.
+- Responsive portrait, landscape, tablet and desktop layouts; a still poster appears immediately and remains available if WebGL2 is unavailable.
 
-`src/motion.js` owns one imperative animation loop, outside React render cycles. Individual leaves have distinct depth, size, drift, rotation and flutter. Foreground grass and two haze layers move independently. Mouse parallax is smoothed; nearby leaves react to the pointer.
+## Implementation
 
-Desktop uses 52 leaves and 240 grass blades at up to 60 frames/second, with canvas pixel ratio capped at 1.6. Narrow/coarse-pointer layouts use 25 leaves, 110 blades, a 30-frame limit and ratio capped at 1.25. Portrait artwork is selected by aspect ratio rather than cropping the samurai from the wide scene.
+React + Vite. The WebGL2 renderer and Web Audio engine own their resources outside React’s render cycle. Background rendering stops in hidden tabs, and owned animation frames, listeners, observers, timers, shaders, buffers and audio nodes are cleaned up. Rendering is capped at 30fps on narrow/coarse-pointer screens and 60fps on desktop. Canvas DPR is capped at 1.25 on mobile and 1.6 on desktop, with a 2.8-megapixel ceiling.
 
-Reduced-motion preferences start the scene paused and remove text/hover transitions and parallax. Explicit Play can enable ambient motion for the visit. Hidden documents cancel rendering and resume with a fresh time step. ResizeObserver preserves scene sizing, and cleanup cancels animation, observers and event listeners.
+Assets and fonts are self-hosted. See [asset provenance](public/art/PROVENANCE.md) and the font licenses in `public/fonts/`. SVG controls live in `src/Icon.jsx`; the favicon is `public/favicon.svg`.
 
-## Artwork and fonts
-
-The four paintings and one transparent maple leaf were generated with the built-in image-generation tool, reviewed, then optimized to WebP. The wide and portrait daylight scenes each have a matching dusk companion. All runtime artwork is under `public/art/`; [generation prompts](public/art/GENERATION.md) describe the complete prompt set. The code and paintings are original; the [reference video](https://x.com/sucodeee/status/2111851097551782252) informed composition and mood.
-
-Cormorant Garamond and DM Sans are self-hosted in `public/fonts/`, with their SIL Open Font License notices. Interface icons and the fallback leaf silhouettes are custom vector artwork; generated leaf sprites are cached once for efficient rendering.
-
-## Verify
+## Check
 
 ```sh
 npm run lint
 npm run build
-npx playwright install chromium
 npm run test:e2e
 ```
 
-Local browser checks default to installed Google Chrome; CI uses bundled Chromium. `HERO_QA_URL` can target a published URL, and `HERO_QA_DIR` selects the evidence directory. Tests check assets, HTML controls, actual canvas motion, pointer interaction, wind/daylight/pause, focus and immersive exit, six layouts, reduced motion and simulated document visibility.
+The browser checks run against the production build using installed Chrome locally and Playwright Chromium in CI. They cover meaningful timer/audio behavior, motion state, scene selection, settings, dialogs, keyboard navigation, responsive dimensions, touch emulation, reduced motion and simulated visibility interruption.
 
-The previous arcade source and assets have been removed from this project. Earlier versions remain recoverable through Git history.
+CI verifies branch pushes and pull requests, and saves a downloadable production build. GitHub Pages deployment is restricted to `main`; pushing this branch does not replace the current live site.
+
+Phone, tablet, touch and high-DPR checks are browser simulations. No physical-device, Safari or Firefox coverage is claimed. Audio signal activity can be checked automatically; listening quality still depends on the playback device. Reference background rights remain with the original owners; provenance does not assert a new third-party license.
+
+Verified on 2026-10-29: production build, ESLint and all 11 browser tests passed in local Chrome. These include actual changing canvas pixels, pointer parallax, real graphics-context loss and restoration, audio signal activity, real countdown/pause/resume, all navigation and immersive controls, and the six viewport sizes. Timer completion uses a controlled wall-clock advance; fallback and hidden-tab tests are explicitly simulated. Fraunces uses its optical-size variable WOFF2 files to preserve the reference typography.
