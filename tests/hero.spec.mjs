@@ -134,7 +134,12 @@ test('magnetic buttons, press feedback, underlines and immersive keyboard exit w
   await expect(enter).toBeFocused()
   await page.getByRole('button',{name:'Scenery view',exact:true}).click()
   await exit.click()
-  await expect(enter).toBeFocused()
+  const scenery=page.getByRole('button',{name:'Scenery view',exact:true})
+  await expect(scenery).toBeFocused()
+  await scenery.press('Enter')
+  await expect(exit).toBeFocused()
+  await page.keyboard.press('Escape')
+  await expect(scenery).toBeFocused()
 })
 
 test('desktop, tablet and phone layouts preserve controls, artwork and resolution limits through resizing', async ({page}) => {

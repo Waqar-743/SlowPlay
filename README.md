@@ -6,7 +6,7 @@ Run `npm ci` and `npm run dev`. The deployment base is `/SlowPlay/` for [GitHub 
 
 ## Controls
 
-- **Enter the scenery / Scenery view:** hides the interface. **Exit scenery** or **Escape** returns, restoring keyboard focus.
+- **Enter the scenery / Scenery view:** hides the interface. **Exit scenery** or **Escape** returns, restoring keyboard focus to the button that opened the scenery.
 - **Set the mood / wind control:** opens the native settings dialog. Adjust wind from calm to gusts, select daylight or dusk, and pause or resume.
 - **Daylight / Dusk:** switches the complete painted lighting environment, with matching leaf and grass shading.
 - **Pause / Resume:** freezes or resumes leaves, grass, haze and pointer parallax.

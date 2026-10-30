@@ -20,7 +20,7 @@ export default function App() {
   const [artError, setArtError] = useState(false)
   const root = useRef(null), canvas = useRef(null), controller = useRef(null)
   const dialog = useRef(null), enterButton = useRef(null), exitButton = useRef(null)
-  const settingsOpener = useRef(null), wasImmersive = useRef(false)
+  const settingsOpener = useRef(null), sceneryOpener = useRef(null), wasImmersive = useRef(false)
   const initial = useRef({ ...preferences, paused })
   const windName = preferences.wind < 0.15 ? 'Calm' : preferences.wind < 0.6 ? 'Gentle breeze' : 'Autumn gusts'
   const update = change => setPreferences(previous => ({ ...previous, ...change }))
@@ -41,7 +41,7 @@ export default function App() {
   }, [])
   useEffect(() => {
     if (immersive) exitButton.current?.focus({ preventScroll: true })
-    else if (wasImmersive.current) enterButton.current?.focus({ preventScroll: true })
+    else if (wasImmersive.current) (sceneryOpener.current ?? enterButton.current)?.focus({ preventScroll: true })
     wasImmersive.current = immersive
     const escape = event => {
       if (event.key === 'Escape' && immersive) { event.preventDefault(); setImmersive(false) }
@@ -53,6 +53,7 @@ export default function App() {
     if (settingsOpen && !dialog.current.open) dialog.current.showModal()
     if (!settingsOpen && dialog.current.open) dialog.current.close()
   }, [settingsOpen])
+  const openScenery = event => { sceneryOpener.current = event.currentTarget; setImmersive(true) }
   const openSettings = event => { settingsOpener.current = event.currentTarget; setSettingsOpen(true) }
   const closeSettings = () => {
     if (dialog.current.open) dialog.current.close()
@@ -76,14 +77,14 @@ export default function App() {
       <header className="masthead">
         <a className="wordmark" href="#hero" aria-label="Aki home"><span className="brand-seal" aria-hidden="true">秋</span><span>AKI<span className="brand-subtitle">A MOMENT APART</span></span></a>
         <span className="masthead-note"><span /> An autumn interlude</span>
-        <button className="top-scenery underlined" onClick={() => setImmersive(true)}>Scenery view <Icon name="expand" size={16}/></button>
+        <button className="top-scenery underlined" onClick={openScenery}>Scenery view <Icon name="expand" size={16}/></button>
       </header>
       <section className="hero-copy" id="moment" tabIndex={-1} aria-labelledby="hero-title">
         <p className="eyebrow reveal"><span className="eyebrow-rule" /> STILLNESS, IN SEASON</p>
         <h1 id="hero-title" className="reveal">Let the world<br /><em>fall quiet.</em></h1>
         <p className="supporting-copy reveal">A quiet hillside. A passing breeze.<br />Nothing to chase. Just a moment to be.</p>
         <div className="hero-actions reveal">
-          <button ref={enterButton} className="button-primary magnetic" onClick={() => setImmersive(true)}>Enter the scenery <Icon name="arrow" size={19}/></button>
+          <button ref={enterButton} className="button-primary magnetic" onClick={openScenery}>Enter the scenery <Icon name="arrow" size={19}/></button>
           <button className="button-text magnetic underlined" onClick={openSettings}>Set the mood <Icon name="sliders" size={17}/></button>
         </div>
         <span className="copy-footnote reveal">BREATHE IN. LET GO.</span>
